@@ -1,2 +1,2 @@
 # OroCRMHangoutsCallBundle
-Integration that will allow to make calls using Google Hangout
+Integration that will allow to make calls using Google Hangouts
