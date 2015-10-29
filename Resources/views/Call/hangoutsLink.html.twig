@@ -1,0 +1,18 @@
+{% import 'OroUIBundle::macros.html.twig' as UI %}
+
+{% set options = {
+    class: cssClass is defined ? cssClass : '',
+    aCss: 'no-hash',
+    iCss: 'icon-hangouts',
+    label: 'orocrm.hangoutscall.call.hangouts_call'|trans,
+    pageComponent: {
+        module: 'orocrmhangoutscall/js/app/components/hangouts-component',
+        options: {
+            hangoutOptions: hangoutOptions is defined ? hangoutOptions : {}
+        }
+    }
+} %}
+
+{% block action_controll %}
+    {{ UI.clientLink(options) }}
+{% endblock %}

@@ -1,0 +1,12 @@
+placeholders:
+    phone_actions:
+        items:
+            orocrm_hangoutscall_action_button:
+                order: 10
+    email_actions:
+        items:
+            orocrm_hangoutscall_action_button:
+                order: 10
+items:
+    orocrm_hangoutscall_action_button:
+        template: OroCRMHangoutsCallBundle:Call/ContactAction:hangoutsButton.html.twig
