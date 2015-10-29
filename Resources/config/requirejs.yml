@@ -1,0 +1,3 @@
+config:
+    paths:
+        'orocrmhangoutscall/js/app/components/hangouts-component': 'bundles/orocrmhangoutscall/js/app/components/hangouts-component.js'
