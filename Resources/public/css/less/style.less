@@ -27,17 +27,17 @@
   .btn.ok {
     display: none;
   }
-  .modal-footer {
-    height: 30px;
-    box-sizing: content-box;
-  }
 }
 
 .start-button-place-holder {
   display: inline-block;
+  vertical-align: bottom;
   height: 30px;
   min-width: 136px;// default size of hangout button
   &:empty {
     background: url('../../../oroui/img/loader-16.gif') no-repeat center center;
+  }
+  &.disabled {
+    display: none;
   }
 }

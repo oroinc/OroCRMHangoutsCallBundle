@@ -9,6 +9,8 @@ define(function(require) {
     var BaseView = require('oroui/js/app/views/base/view');
 
     StartButtonView = BaseView.extend({
+        className: 'start-button-place-holder',
+
         /**
          * @type {Object}
          */
@@ -38,11 +40,27 @@ define(function(require) {
          *     The default value is 136.
          */
         initialize: function(options) {
-            _.extend(this, _.defaults(_.pick(options, ['hangoutOptions']), {
-                hangoutOptions: {}
-            }));
-
+            this.setHangoutOptions(_.result(options, 'hangoutOptions'));
             StartButtonView.__super__.initialize.call(this, options);
+        },
+
+        _ensureElement: function() {
+            StartButtonView.__super__._ensureElement.call(this);
+            if (this.className) {
+                this.$el.addClass(_.result(this, 'className'));
+            }
+        },
+
+        setHangoutOptions: function(options) {
+            this.hangoutOptions = options || {};
+        },
+
+        enable: function() {
+            this.$el.removeClass('disabled');
+        },
+
+        disable: function() {
+            this.$el.addClass('disabled');
         },
 
         render: function() {
@@ -66,7 +84,7 @@ define(function(require) {
             }));
 
             $container.find('iframe').one('load', _.bind(function(e) {
-                this.$el.append(e.target);
+                this.$el.html(e.target);
                 $container.remove();
                 this._resolveDeferredRender();
             }, this));

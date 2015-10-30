@@ -38,7 +38,6 @@ define(function(require) {
 
             this.startButtonView = new StartButtonView({
                 autoRender: true,
-                className: 'start-button-place-holder',
                 hangoutOptions: this.hangoutOptions
             });
 

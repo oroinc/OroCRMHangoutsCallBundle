@@ -7,6 +7,12 @@ placeholders:
         items:
             orocrm_hangoutscall_action_button:
                 order: 10
+    calendar_event_widget_view_actions_jstemplate:
+        items:
+            orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
+                order: 10
 items:
     orocrm_hangoutscall_action_button:
         template: OroCRMHangoutsCallBundle:Call/ContactAction:hangoutsButton.html.twig
+    orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
+        template: OroCRMHangoutsCallBundle:CalendarEvent/widget:viewActions.html.twig
