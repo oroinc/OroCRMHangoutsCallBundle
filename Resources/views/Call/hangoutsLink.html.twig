@@ -6,9 +6,11 @@
     iCss: 'icon-hangouts',
     label: 'orocrm.hangoutscall.call.hangouts_call'|trans,
     pageComponent: {
-        module: 'orocrmhangoutscall/js/app/components/hangouts-component',
+        module: 'orocrmhangoutscall/js/app/components/invite-hangout-component',
         options: {
-            hangoutOptions: hangoutOptions is defined ? hangoutOptions : {}
+            modalOptions: {
+                hangoutOptions: hangoutOptions is defined ? hangoutOptions : {}
+            }
         }
     }
 } %}

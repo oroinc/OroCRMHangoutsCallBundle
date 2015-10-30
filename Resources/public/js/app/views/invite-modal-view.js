@@ -5,50 +5,59 @@ define(function(require) {
     var _ = require('underscore');
     var __ = require('orotranslation/js/translator');
     var Modal = require('oroui/js/modal');
+    var StartButtonView = require('./start-button-view');
     var modalContentTemplate = require('tpl!../../../templates/invite-modal-content.html');
 
     InviteModalView = Modal.extend({
         className: 'modal oro-modal-normal invite-hangout-modal',
 
         /**
-         * @type {HTMLIFrameElement}
+         * @type {Object}
          */
-        startButton: null,
+        hangoutOptions: null,
 
         initialize: function(options) {
-            _.extend(this, _.defaults(_.pick(options, ['invites']), {
-                invites: []
+            _.extend(this, _.defaults(_.pick(options, ['hangoutOptions']), {
+                hangoutOptions: {}
             }));
 
-            options.title = __('orocrm.hangoutscall.start_hangouts_dialog.title');
-            options.content = modalContentTemplate(this.getContentTemplateData());
             InviteModalView.__super__.initialize.call(this, options);
         },
 
         getContentTemplateData: function() {
             return {
-                invites: this.invites
+                invites: this.hangoutOptions.invites || []
             };
         },
 
-        addStartButton: function(startButton) {
-            this.startButton = startButton;
-            if (this.isRendered) {
-                this.appendStartButton();
-            }
-        },
-
         render: function() {
+            this.options.title = __('orocrm.hangoutscall.start_hangouts_dialog.title');
+            this.options.content = modalContentTemplate(this.getContentTemplateData());
+
             InviteModalView.__super__.render.call(this);
-            this.$('.modal-footer').append('<div class="start-button-place-holder" />');
-            if (this.startButton) {
-                this.appendStartButton();
+
+            this.startButtonView = new StartButtonView({
+                autoRender: true,
+                hangoutOptions: this.hangoutOptions
+            });
+
+            if (this.startButtonView.deferredRender) {
+                this.startButtonView.deferredRender.fail(_.bind(function() {
+                    this.trigger('fail');
+                }, this));
             }
+
+            this.$('.modal-footer').append(this.startButtonView.$el);
+
             return this;
         },
 
-        appendStartButton: function() {
-            this.$('.modal-footer .start-button-place-holder').append(this.startButton);
+        remove: function() {
+            if (this.startButtonView) {
+                this.startButtonView.dispose();
+                delete this.startButtonView;
+            }
+            InviteModalView.__super__.remove.call(this);
         }
     });
 

@@ -3,7 +3,10 @@
   background: url("../../img/hangouts-icon.png") no-repeat center;
   background-size: 14px 14px;
   width: 14px;
-  height: 100%;
+  .mobile-version & {
+    background-size: 17px 17px;
+    width: 17px;
+  }
 }
 
 .invite-hangout-modal {
@@ -27,17 +30,17 @@
   .btn.ok {
     display: none;
   }
-  .modal-footer {
-    height: 30px;
-    box-sizing: content-box;
-  }
 }
 
 .start-button-place-holder {
   display: inline-block;
+  vertical-align: bottom;
   height: 30px;
   min-width: 136px;// default size of hangout button
   &:empty {
     background: url('../../../oroui/img/loader-16.gif') no-repeat center center;
+  }
+  &.disabled {
+    display: none;
   }
 }

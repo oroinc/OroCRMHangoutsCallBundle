@@ -1,16 +1,16 @@
+/*global gapi*/
 define(function(require) {
     'use strict';
 
-    var HangoutsComponent;
-    var _ = require('underscore');
-    var mediator = require('oroui/js/mediator');
-    var __ = require('orotranslation/js/translator');
-    var InviteButtonView = require('../views/invite-button-view');
-    var InviteModalView = require('../views/invite-modal-view');
-    var BaseComponent = require('oroui/js/app/components/base/component');
-    var startButtonLoader = require('../../start-button-loader');
+    var StartButtonView;
 
-    HangoutsComponent = BaseComponent.extend({
+    var $ = require('jquery');
+    var _ = require('underscore');
+    var BaseView = require('oroui/js/app/views/base/view');
+
+    StartButtonView = BaseView.extend({
+        className: 'start-button-place-holder',
+
         /**
          * @type {Object}
          */
@@ -40,44 +40,56 @@ define(function(require) {
          *     The default value is 136.
          */
         initialize: function(options) {
-            _.extend(this, _.defaults(_.pick(options, ['hangoutOptions']), {
-                hangoutOptions: {}
+            this.setHangoutOptions(_.result(options, 'hangoutOptions'));
+            StartButtonView.__super__.initialize.call(this, options);
+        },
+
+        _ensureElement: function() {
+            StartButtonView.__super__._ensureElement.call(this);
+            if (this.className) {
+                this.$el.addClass(_.result(this, 'className'));
+            }
+        },
+
+        setHangoutOptions: function(options) {
+            this.hangoutOptions = options || {};
+        },
+
+        enable: function() {
+            this.$el.removeClass('disabled');
+        },
+
+        disable: function() {
+            this.$el.addClass('disabled');
+        },
+
+        render: function() {
+            this._deferredRender();
+            require(['//apis.google.com/js/platform.js'], _.bind(this._render, this));
+            return this;
+        },
+
+        _render: function() {
+            if (!gapi || !gapi.hangout) {
+                this.deferredRender.reject(new Error('Cannot load Google API lib'));
+                delete this.deferredRender;
+                return;
+            }
+
+            var $container = $('<div style="display: none"/>');
+            $('body').append($container);
+
+            gapi.hangout.render($container[0], $.extend({}, this.hangoutOptions, {
+                render: 'createhangout'
             }));
 
-            this.inviteButtonView = new InviteButtonView({
-                el: options._sourceElement[0]
-            });
-            this.listenTo(this.inviteButtonView, 'invite', this.openInviteModal);
-        },
-
-        getStartButtonOptions: function() {
-            return this.hangoutOptions;
-        },
-
-        openInviteModal: function() {
-            if (this.modal) {
-                this.modal.remove();
-            }
-
-            var modal = this.modal = new InviteModalView({
-                invites: this.hangoutOptions.invites || []
-            });
-            this.modal.open();
-
-            startButtonLoader(this.getStartButtonOptions())
-                .done(function(button) {
-                    modal.addStartButton(button);
-                })
-                .fail(_.bind(this.onStartButtonFail, this));
-        },
-
-        onStartButtonFail: function() {
-            if (this.modal) {
-                this.modal.close();
-            }
-            mediator.execute('showErrorMessage', __('orocrm.hangoutscall.messages.connection_error'));
+            $container.find('iframe').one('load', _.bind(function(e) {
+                this.$el.html(e.target);
+                $container.remove();
+                this._resolveDeferredRender();
+            }, this));
         }
     });
 
-    return HangoutsComponent;
+    return StartButtonView;
 });
