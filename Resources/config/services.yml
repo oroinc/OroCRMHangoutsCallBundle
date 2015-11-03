@@ -1,0 +1,9 @@
+parameters:
+    orocrm_hangouts_call.placeholder.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\CalendarEventPlaceholderFilter
+
+services:
+    orocrm_hangouts_call.placeholder.filter:
+        class: %orocrm_hangouts_call.placeholder.filter.class%
+        arguments:
+            - @oro_entity.doctrine_helper
+            - @oro_security.security_facade

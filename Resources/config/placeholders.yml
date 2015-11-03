@@ -11,8 +11,15 @@ placeholders:
         items:
             orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
                 order: 10
+    view_navButtons_after:
+        items:
+            orocrm_hangoutscall_calendar_event_view_actions_template:
+                order: 10
 items:
     orocrm_hangoutscall_action_button:
-        template: OroCRMHangoutsCallBundle:Call/ContactAction:hangoutsButton.html.twig
+        template: OroCRMHangoutsCallBundle:Call/ContactAction:inviteHangoutButton.html.twig
     orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
         template: OroCRMHangoutsCallBundle:CalendarEvent/widget:viewActions.html.twig
+    orocrm_hangoutscall_calendar_event_view_actions_template:
+        applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable($entity$)
+        template: OroCRMHangoutsCallBundle:CalendarEvent:viewActions.html.twig
