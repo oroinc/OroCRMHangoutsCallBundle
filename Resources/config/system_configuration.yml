@@ -1,0 +1,26 @@
+oro_system_configuration:
+    groups:
+        google_hangouts_settings:
+            title: orocrm.hangoutscall.system_configuration.groups.google_hangouts_settings.title
+
+    fields:
+        oro_crm_hangouts_call.enable_google_hangouts:
+            data_type: boolean
+            type: oro_config_checkbox
+            options:
+                label: orocrm.hangoutscall.system_configuration.fields.enable_google_hangouts.label
+                required: false
+                resettable: false
+            priority: 40
+
+    tree:
+        system_configuration:
+            platform:
+                children:
+                    integrations:
+                        children:
+                            google_settings:
+                                children:
+                                    google_hangouts_settings:
+                                        children:
+                                            - oro_crm_hangouts_call.enable_google_hangouts

@@ -4,6 +4,7 @@ namespace OroCRM\Bundle\HangoutsCallBundle\Placeholder;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\SecurityBundle\SecurityFacade;
+use Oro\Bundle\ConfigBundle\Config\ConfigManager;
 
 class CalendarEventPlaceholderFilter
 {
@@ -16,12 +17,23 @@ class CalendarEventPlaceholderFilter
     protected $securityFacade;
 
     /**
+     * @var ConfigManager
+     */
+    protected $configManager;
+
+    /**
      * @param DoctrineHelper $doctrineHelper
      * @param SecurityFacade $securityFacade
+     * @param ConfigManager $configManager
      */
-    public function __construct(DoctrineHelper $doctrineHelper, SecurityFacade $securityFacade) {
+    public function __construct(
+        DoctrineHelper $doctrineHelper,
+        SecurityFacade $securityFacade,
+        ConfigManager $configManager
+    ) {
         $this->doctrineHelper = $doctrineHelper;
         $this->securityFacade = $securityFacade;
+        $this->configManager  = $configManager;
     }
 
     /**
@@ -32,7 +44,8 @@ class CalendarEventPlaceholderFilter
      */
     public function isApplicable($entity = null)
     {
-        return is_object($entity) &&
+        return $this->configManager->get('oro_crm_hangouts_call.enable_google_hangouts') &&
+            is_object($entity) &&
             // entity is calendar event
             $this->doctrineHelper->getEntityClass($entity) == self::CALENDAR_EVENT_CLASS &&
             // owner of the calendar is current user
