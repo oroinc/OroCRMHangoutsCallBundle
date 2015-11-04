@@ -2,14 +2,14 @@
 
 {% if phone is defined %}
     {% set invites = [{
-        name: '' ~ entity,
-        id: phone,
+        name: entity is not empty ? entity|escape('html') : '',
+        id: phone|escape('html'),
         invite_type: 'PHONE'
     }] %}
 {% elseif email is defined %}
     {% set invites = [{
-        name: '' ~ entity,
-        id: email,
+        name: entity is not empty ? entity|escape('html') : '',
+        id: email|escape('html'),
         invite_type: 'EMAIL',
     }] %}
 {% endif %}
