@@ -1,14 +1,7 @@
-{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import 'OroCRMHangoutsCallBundle::macros.html.twig' as HangoutsCall %}
 
-{% set pageComponent = {
-    module: 'oroui/js/app/components/view-component',
-    options: {
-        view: 'orocrmhangoutscall/js/app/views/start-button-view',
-        autoRender: true,
-        hangoutOptions: {
-            invites: invites is defined ? invites : []
-        }
+{{ HangoutsCall.renderStartButton({
+    hangoutOptions: {
+        invites: invites is defined ? invites : []
     }
-} %}
-
-<div class="start-hangout-button-place-holder" {{ UI.renderPageComponentAttributes(pageComponent) }}></div>
+}) }}
