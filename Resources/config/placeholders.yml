@@ -38,5 +38,5 @@ items:
         applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
         template: OroCRMHangoutsCallBundle:Call/widget:updateActions.html.twig
     orocrm_hangoutscall_call_log_update_actions:
-        applicable: @orocrm_hangouts_call.placeholder.call.filter->isApplicable()
+        applicable: @orocrm_hangouts_call.placeholder.call.filter->isApplicable($entity$)
         template: OroCRMHangoutsCallBundle:Call:updateActions.html.twig
