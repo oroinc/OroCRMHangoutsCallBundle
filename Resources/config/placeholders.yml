@@ -19,6 +19,10 @@ placeholders:
         items:
             orocrm_hangoutscall_calendar_event_view_actions:
                 order: 10
+    update_navButtons_after:
+        items:
+            orocrm_hangoutscall_call_log_update_actions:
+                order: 10
 
 items:
     orocrm_hangoutscall_action_button:
@@ -33,3 +37,6 @@ items:
     orocrm_hangoutscall_call_log_widget_update_actions:
         applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
         template: OroCRMHangoutsCallBundle:Call/widget:updateActions.html.twig
+    orocrm_hangoutscall_call_log_update_actions:
+        applicable: @orocrm_hangouts_call.placeholder.call.filter->isApplicable()
+        template: OroCRMHangoutsCallBundle:Call:updateActions.html.twig

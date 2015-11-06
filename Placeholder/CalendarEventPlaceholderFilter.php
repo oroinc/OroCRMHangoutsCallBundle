@@ -9,28 +9,28 @@ class CalendarEventPlaceholderFilter
 {
     const CALENDAR_EVENT_CLASS = 'Oro\Bundle\CalendarBundle\Entity\CalendarEvent';
 
+    /** @var PlaceholderFilter */
+    protected $placeholderFilter;
+
     /** @var DoctrineHelper */
     protected $doctrineHelper;
 
     /** @var SecurityFacade */
     protected $securityFacade;
 
-    /** @var PlaceholderFilter */
-    protected $placeholderFilter;
-
     /**
+     * @param PlaceholderFilter $placeholderFilter
      * @param DoctrineHelper $doctrineHelper
      * @param SecurityFacade $securityFacade
-     * @param PlaceholderFilter $placeholderFilter
      */
     public function __construct(
+        PlaceholderFilter $placeholderFilter,
         DoctrineHelper $doctrineHelper,
-        SecurityFacade $securityFacade,
-        PlaceholderFilter $placeholderFilter
+        SecurityFacade $securityFacade
     ) {
-        $this->doctrineHelper = $doctrineHelper;
-        $this->securityFacade = $securityFacade;
-        $this->placeholderFilter  = $placeholderFilter;
+        $this->placeholderFilter = $placeholderFilter;
+        $this->doctrineHelper    = $doctrineHelper;
+        $this->securityFacade    = $securityFacade;
     }
 
     /**

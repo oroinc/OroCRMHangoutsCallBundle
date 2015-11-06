@@ -64,6 +64,7 @@ define(function(require) {
         },
 
         render: function() {
+            this.$el.empty();
             this._deferredRender();
             require(['//apis.google.com/js/platform.js'], _.bind(this._render, this));
             return this;

@@ -11,7 +11,7 @@
 {% macro renderStartButton(parameters) %}
     {% import 'OroUIBundle::macros.html.twig' as UI %}
     {% set pageComponent = {
-        module: 'oroui/js/app/components/view-component',
+        module: parameters.component is defined ? parameters.component : 'oroui/js/app/components/view-component',
         options: {
             view: 'orocrmhangoutscall/js/app/views/start-button-view',
             autoRender: true,
