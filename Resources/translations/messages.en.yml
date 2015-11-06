@@ -1,3 +1,8 @@
 orocrm.hangoutscall:
     call:
-        hangouts_call:    Hangouts call
+        hangouts_call: Hangouts call
+    system_configuration:
+        groups:
+            google_hangouts_settings.title: Google Hangouts
+        fields:
+            enable_google_hangouts.label: Enable

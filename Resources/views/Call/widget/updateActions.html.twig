@@ -1,0 +1,14 @@
+{% import 'OroCRMHangoutsCallBundle::macros.html.twig' as HangoutsCall %}
+
+{{ HangoutsCall.renderStartButton({
+    class: 'action',
+    dataAttributes: {
+        'action-name': 'hangout-call'
+    },
+    hangoutOptions: {
+        invites: [{
+            id: entity.phoneNumber|escape('html'),
+            invite_type: 'PHONE',
+        }]
+    }
+}) }}

@@ -15,6 +15,9 @@
     .invite-hangout-modal-participant-name {
       font-weight: bold;
       padding-right: 25px;
+      &:empty {
+        display: none;
+      }
     }
   }
   .invite-hangout-modal-note {
@@ -32,7 +35,7 @@
   }
 }
 
-.start-button-place-holder {
+.start-hangout-button-placeholder {
   display: inline-block;
   vertical-align: bottom;
   height: 30px;

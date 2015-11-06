@@ -9,7 +9,7 @@ define(function(require) {
     var BaseView = require('oroui/js/app/views/base/view');
 
     StartButtonView = BaseView.extend({
-        className: 'start-button-place-holder',
+        className: 'start-hangout-button-placeholder',
 
         /**
          * @type {Object}
