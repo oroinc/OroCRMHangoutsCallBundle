@@ -18,7 +18,7 @@
             hangoutOptions: parameters.hangoutOptions is defined ? parameters.hangoutOptions : {}
         }
     } %}
-    <div class="start-hangout-button-place-holder{% if parameters.class is defined %} {{ parameters.class }}{% endif %}"
+    <div class="start-hangout-button-placeholder{% if parameters.class is defined %} {{ parameters.class }}{% endif %}"
             {% if parameters.dataAttributes is defined and parameters.dataAttributes|length %}
                 {{ UI.renderAttributes(parameters.dataAttributes) }}
             {% endif %}
