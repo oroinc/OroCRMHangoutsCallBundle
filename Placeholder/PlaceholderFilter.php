@@ -17,7 +17,8 @@ class PlaceholderFilter
      * @param ConfigManager $configManager
      * @param UserAgentProvider $userAgentProvider
      */
-    public function __construct(ConfigManager $configManager, UserAgentProvider $userAgentProvider) {
+    public function __construct(ConfigManager $configManager, UserAgentProvider $userAgentProvider)
+    {
         $this->configManager  = $configManager;
         $this->userAgentProvider  = $userAgentProvider;
     }
