@@ -1,0 +1,42 @@
+placeholders:
+    phone_actions:
+        items:
+            orocrm_hangoutscall_action_button:
+                order: 10
+    email_actions:
+        items:
+            orocrm_hangoutscall_action_button:
+                order: 10
+    calendar_event_widget_view_actions_jstemplate:
+        items:
+            orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
+                order: 10
+    call_log_widget_update_actions:
+        items:
+            orocrm_hangoutscall_call_log_widget_update_actions:
+                order: 10
+    view_navButtons_after:
+        items:
+            orocrm_hangoutscall_calendar_event_view_actions:
+                order: 10
+    update_navButtons_after:
+        items:
+            orocrm_hangoutscall_call_log_update_actions:
+                order: 10
+
+items:
+    orocrm_hangoutscall_action_button:
+        applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
+        template: OroCRMHangoutsCallBundle:Call/action:inviteHangoutButton.html.twig
+    orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
+        applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
+        template: OroCRMHangoutsCallBundle:CalendarEvent/widget:viewActions.html.twig
+    orocrm_hangoutscall_calendar_event_view_actions:
+        applicable: @orocrm_hangouts_call.placeholder.calendar_event.filter->isApplicable($entity$)
+        template: OroCRMHangoutsCallBundle:CalendarEvent:viewActions.html.twig
+    orocrm_hangoutscall_call_log_widget_update_actions:
+        applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
+        template: OroCRMHangoutsCallBundle:Call/widget:updateActions.html.twig
+    orocrm_hangoutscall_call_log_update_actions:
+        applicable: @orocrm_hangouts_call.placeholder.call.filter->isApplicable($entity$)
+        template: OroCRMHangoutsCallBundle:Call:updateActions.html.twig

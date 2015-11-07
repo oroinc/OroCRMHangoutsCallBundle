@@ -1,0 +1,22 @@
+parameters:
+    orocrm_hangouts_call.placeholder.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\PlaceholderFilter
+    orocrm_hangouts_call.placeholder.calendar_event.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\CalendarEventPlaceholderFilter
+    orocrm_hangouts_call.placeholder.call.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\CallPlaceholderFilter
+
+services:
+    orocrm_hangouts_call.placeholder.filter:
+        class: %orocrm_hangouts_call.placeholder.filter.class%
+        arguments:
+            - @oro_config.global
+            - @oro_ui.user_agent_provider
+    orocrm_hangouts_call.placeholder.calendar_event.filter:
+        class: %orocrm_hangouts_call.placeholder.calendar_event.filter.class%
+        arguments:
+            - @orocrm_hangouts_call.placeholder.filter
+            - @oro_entity.doctrine_helper
+            - @oro_security.security_facade
+    orocrm_hangouts_call.placeholder.call.filter:
+        class: %orocrm_hangouts_call.placeholder.call.filter.class%
+        arguments:
+            - @orocrm_hangouts_call.placeholder.filter
+            - @oro_entity.doctrine_helper
