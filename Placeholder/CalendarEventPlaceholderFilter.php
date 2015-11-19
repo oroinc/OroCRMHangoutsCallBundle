@@ -45,8 +45,8 @@ class CalendarEventPlaceholderFilter
             is_object($entity) &&
             // entity is calendar event
             $this->doctrineHelper->getEntityClass($entity) == self::CALENDAR_EVENT_CLASS &&
-            // owner of the calendar is current user
-            $entity->getCalendar()->getOwner() === $this->securityFacade->getLoggedUser() &&
+            // event has a calendar and owner of this calendar is current user
+            $entity->getCalendar() && $entity->getCalendar()->getOwner() === $this->securityFacade->getLoggedUser() &&
             // calendar event has child events
             !$entity->getChildEvents()->isEmpty();
     }
