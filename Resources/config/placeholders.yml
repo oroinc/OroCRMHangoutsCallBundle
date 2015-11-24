@@ -7,13 +7,13 @@ placeholders:
         items:
             orocrm_hangoutscall_action_button:
                 order: 10
-    calendar_event_widget_view_actions_jstemplate:
+    calendar_event_widget_view_additional_properties:
         items:
-            orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
+            orocrm_hangoutscall_calendar_event_widget_view_additional_properties:
                 order: 10
-    call_log_widget_update_actions:
+    call_log_widget_additional_properties:
         items:
-            orocrm_hangoutscall_call_log_widget_update_actions:
+            orocrm_hangoutscall_call_log_widget_additional_properties:
                 order: 10
     view_navButtons_after:
         items:
@@ -28,15 +28,15 @@ items:
     orocrm_hangoutscall_action_button:
         applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
         template: OroCRMHangoutsCallBundle:Call/action:inviteHangoutButton.html.twig
-    orocrm_hangoutscall_calendar_event_widget_view_actions_jstemplate:
+    orocrm_hangoutscall_calendar_event_widget_view_additional_properties:
         applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
-        template: OroCRMHangoutsCallBundle:CalendarEvent/widget:viewActions.html.twig
+        template: OroCRMHangoutsCallBundle:CalendarEvent/widget:viewProperties.html.twig
     orocrm_hangoutscall_calendar_event_view_actions:
         applicable: @orocrm_hangouts_call.placeholder.calendar_event.filter->isApplicable($entity$)
         template: OroCRMHangoutsCallBundle:CalendarEvent:viewActions.html.twig
-    orocrm_hangoutscall_call_log_widget_update_actions:
+    orocrm_hangoutscall_call_log_widget_additional_properties:
         applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
-        template: OroCRMHangoutsCallBundle:Call/widget:updateActions.html.twig
+        template: OroCRMHangoutsCallBundle:Call/widget:additionalProperties.html.twig
     orocrm_hangoutscall_call_log_update_actions:
         applicable: @orocrm_hangouts_call.placeholder.call.filter->isApplicable($entity$)
         template: OroCRMHangoutsCallBundle:Call:updateActions.html.twig

@@ -1,11 +1,18 @@
 {% import 'OroCRMHangoutsCallBundle::macros.html.twig' as HangoutsCall %}
 
-{% set invites = [] %}
+{% set hangout_options = {} %}
 {% if entity is not empty %}
-    {% set invites = [{
-        id: entity.phoneNumber|escape('html'),
-        invite_type: 'PHONE'
-    }] %}
+    {% set hangout_options = hangout_options|merge({
+        invites: [{
+            id: entity.phoneNumber|escape('html'),
+            invite_type: 'PHONE'
+        }]
+    }) %}
+{% endif %}
+{% if widget_size is defined %}
+    {% set hangout_options = hangout_options|merge({
+        widget_size: widget_size
+    }) %}
 {% endif %}
 
 {{ HangoutsCall.renderStartButton({
@@ -14,7 +21,5 @@
     dataAttributes: {
         'action-name': 'hangout-call'
     },
-    hangoutOptions: {
-        invites: invites
-    }
+    hangoutOptions: hangout_options
 }) }}

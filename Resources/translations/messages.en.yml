@@ -1,4 +1,5 @@
 orocrm.hangoutscall:
+    label: "Hangout"
     call:
         hangouts_call: Hangouts call
     system_configuration:
