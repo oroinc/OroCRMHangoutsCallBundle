@@ -1,5 +1,4 @@
 orocrm.hangoutscall:
-    label: "Hangout"
     start_hangouts_dialog:
         title: "Invite Contacts to a Google Hangout"
         content_intro: "{0}Click the 'Start a Hangout' button to open a Google Hangout now|{1}Click the 'Start a Hangout' button to invite this user to a Google Hangout now|[2,Inf[Click the 'Start a Hangout' button to invite these users to a Google Hangout now"

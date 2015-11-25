@@ -30,7 +30,7 @@ items:
         template: OroCRMHangoutsCallBundle:Call/action:inviteHangoutButton.html.twig
     orocrm_hangoutscall_calendar_event_widget_view_additional_properties:
         applicable: @orocrm_hangouts_call.placeholder.filter->isApplicable()
-        template: OroCRMHangoutsCallBundle:CalendarEvent/widget:viewProperties.html.twig
+        template: OroCRMHangoutsCallBundle:CalendarEvent/widget:additionalProperties.html.twig
     orocrm_hangoutscall_calendar_event_view_actions:
         applicable: @orocrm_hangouts_call.placeholder.calendar_event.filter->isApplicable($entity$)
         template: OroCRMHangoutsCallBundle:CalendarEvent:viewActions.html.twig
