@@ -18,12 +18,14 @@ define(function(require) {
         },
 
         initialize: function(options) {
-            _.extend(this, _.defaults(_.pick(options, ['calendarEvent']), {
-                calendarEvent: {}
+            _.extend(this, _.defaults(_.pick(options, ['calendarEvent', 'hangoutOptions']), {
+                calendarEvent: {},
+                hangoutOptions: {}
             }));
 
             this.startButtonView = new StartButtonView({
-                el: options._sourceElement
+                el: options._sourceElement,
+                hangoutOptions: this.hangoutOptions
             });
 
             // collection of invited users
@@ -50,9 +52,9 @@ define(function(require) {
                 };
             });
 
-            this.startButtonView.setHangoutOptions({
+            this.startButtonView.setHangoutOptions(_.extend({}, this.hangoutOptions, {
                 invites: invites
-            });
+            }));
             this.startButtonView.render();
         }
     });
