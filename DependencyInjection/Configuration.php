@@ -19,7 +19,11 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode    = $treeBuilder->root('oro_crm_hangouts_call');
         SettingsBuilder::append($rootNode, [
-            'enable_google_hangouts' => [
+            'enable_google_hangouts_for_email' => [
+                'value' => true,
+                'type' => 'boolean',
+            ],
+            'enable_google_hangouts_for_phone' => [
                 'value' => true,
                 'type' => 'boolean',
             ]

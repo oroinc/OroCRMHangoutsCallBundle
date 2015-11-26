@@ -7,7 +7,7 @@ services:
     orocrm_hangouts_call.placeholder.filter:
         class: %orocrm_hangouts_call.placeholder.filter.class%
         arguments:
-            - @oro_config.global
+            - @oro_config.user
             - @oro_ui.user_agent_provider
     orocrm_hangouts_call.placeholder.calendar_event.filter:
         class: %orocrm_hangouts_call.placeholder.calendar_event.filter.class%

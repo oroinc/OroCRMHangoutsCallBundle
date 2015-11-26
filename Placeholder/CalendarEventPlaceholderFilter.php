@@ -41,7 +41,7 @@ class CalendarEventPlaceholderFilter
      */
     public function isApplicable($entity = null)
     {
-        return $this->placeholderFilter->isApplicable() &&
+        return $this->placeholderFilter->isEmailApplicable() &&
             is_object($entity) &&
             // entity is calendar event
             $this->doctrineHelper->getEntityClass($entity) == self::CALENDAR_EVENT_CLASS &&
