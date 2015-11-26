@@ -24,14 +24,26 @@ class PlaceholderFilter
     }
 
     /**
-     * Check if HangoutsCall functionality is turned on
+     * Check if HangoutsCall for emails functionality is turned on
      *
      * @return bool
      */
-    public function isApplicable()
+    public function isApplicableEmail()
     {
         // hangouts call functionality is enabled in system configuration and it is desktop client
-        return (bool)$this->configManager->get('oro_crm_hangouts_call.enable_google_hangouts') &&
+        return (bool)$this->configManager->get('oro_crm_hangouts_call.enable_google_hangouts_for_email') &&
+            $this->userAgentProvider->getUserAgent()->isDesktop();
+    }
+
+    /**
+     * Check if HangoutsCall for phones functionality is turned on
+     *
+     * @return bool
+     */
+    public function isApplicablePhone()
+    {
+        // hangouts call functionality is enabled in system configuration and it is desktop client
+        return (bool)$this->configManager->get('oro_crm_hangouts_call.enable_google_hangouts_for_phone') &&
             $this->userAgentProvider->getUserAgent()->isDesktop();
     }
 }

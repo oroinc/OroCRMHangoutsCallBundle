@@ -6,4 +6,5 @@ orocrm.hangoutscall:
         groups:
             google_hangouts_settings.title: Google Hangouts
         fields:
-            enable_google_hangouts.label: Enable
+            enable_google_hangouts_for_phone.label: Enable for Phones
+            enable_google_hangouts_for_email.label: Enable for Emails
