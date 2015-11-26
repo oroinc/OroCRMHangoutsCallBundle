@@ -33,3 +33,14 @@ oro_system_configuration:
                                         children:
                                             - oro_crm_hangouts_call.enable_google_hangouts_for_email
                                             - oro_crm_hangouts_call.enable_google_hangouts_for_phone
+        organization_configuration:
+            platform:
+                children:
+                    integrations:
+                        children:
+                            google_settings:
+                                children:
+                                    google_hangouts_settings:
+                                        children:
+                                            - oro_crm_hangouts_call.enable_google_hangouts_for_email
+                                            - oro_crm_hangouts_call.enable_google_hangouts_for_phone

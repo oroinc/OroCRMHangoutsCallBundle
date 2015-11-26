@@ -35,7 +35,7 @@ class CallPlaceholderFilter
      */
     public function isApplicable($entity = null)
     {
-        return $this->placeholderFilter->isApplicablePhone() &&
+        return $this->placeholderFilter->isPhoneApplicable() &&
             is_object($entity) && $this->doctrineHelper->getEntityClass($entity) == self::CALL_CLASS;
     }
 }

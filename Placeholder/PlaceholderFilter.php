@@ -28,7 +28,7 @@ class PlaceholderFilter
      *
      * @return bool
      */
-    public function isApplicableEmail()
+    public function isEmailApplicable()
     {
         // hangouts call functionality is enabled in system configuration and it is desktop client
         return (bool)$this->configManager->get('oro_crm_hangouts_call.enable_google_hangouts_for_email') &&
@@ -40,7 +40,7 @@ class PlaceholderFilter
      *
      * @return bool
      */
-    public function isApplicablePhone()
+    public function isPhoneApplicable()
     {
         // hangouts call functionality is enabled in system configuration and it is desktop client
         return (bool)$this->configManager->get('oro_crm_hangouts_call.enable_google_hangouts_for_phone') &&
