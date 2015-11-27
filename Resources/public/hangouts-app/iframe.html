@@ -1,0 +1,18 @@
+<html>
+<head>
+    <script type="text/javascript">
+        window.addEventListener('message', function (e) {
+            var data = e.data;
+            if (!data.token) {
+                return;
+            }
+            // push a message into the chain (there are might be not processed ones)
+            var messages = localStorage.getItem(data.token);
+            messages = messages ? JSON.parse(messages) : [];
+            messages.push(data);
+            localStorage.setItem(data.token, JSON.stringify(messages));
+        }, false);
+    </script>
+</head>
+<body></body>
+</html>
