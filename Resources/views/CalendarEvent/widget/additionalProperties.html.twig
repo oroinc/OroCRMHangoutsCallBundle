@@ -1,4 +1,4 @@
-<% if (invitedUsers && invitedUsers.length && connection && connection.userId === {{ app.user.id }}) { %>
+<% if (invitedUsers && invitedUsers.length && connection && connection.userId === {{ app.user.id }} && obj.useHangout !== false) { %>
     {% import 'OroUIBundle::macros.html.twig' as UI %}
     <% var hangoutCallOptions = {
         calendarEvent: obj,
