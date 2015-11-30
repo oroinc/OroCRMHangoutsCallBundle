@@ -1,4 +1,8 @@
 placeholders:
+    requirejs_config_extend:
+        items:
+            orocrm_hangoutscall_requirejs_config:
+                order: 110
     email_actions:
         items:
             orocrm_hangoutscall_email_action_button:
@@ -25,6 +29,8 @@ placeholders:
                 order: 10
 
 items:
+    orocrm_hangoutscall_requirejs_config:
+        template: OroCRMHangoutsCallBundle::requirejs.config.js.twig
     orocrm_hangoutscall_email_action_button:
         applicable: @orocrm_hangouts_call.placeholder.filter->isEmailApplicable()
         template: OroCRMHangoutsCallBundle:Call/action:inviteHangoutButton.html.twig
