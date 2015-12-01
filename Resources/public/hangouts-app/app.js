@@ -28,14 +28,18 @@
          *  - starts interval of publishing 'call-is-going' event
          */
         start: function(number) {
+            var startedAt = this.startedAt = new Date();
             if (this.isGoing()) {
                 this.stop();
             }
             publishEvent('call-started', {
+                startedAt: startedAt.toJSON(),
                 number: number
             });
             this.interval = setInterval(function() {
-                publishEvent('call-is-going');
+                publishEvent('call-is-going', {
+                    duration: (new Date()) - startedAt
+                });
             }, 1000);
         },
 
@@ -46,7 +50,11 @@
          */
         end: function() {
             if (this.isGoing()) {
-                publishEvent('call-ended');
+                var endedAt = new Date();
+                publishEvent('call-ended', {
+                    endedAt: endedAt.toJSON(),
+                    duration: endedAt - this.startedAt
+                });
                 clearInterval(this.interval);
                 this.interval = null;
             }

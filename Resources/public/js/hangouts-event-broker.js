@@ -3,6 +3,7 @@ define(function(require) {
 
     var HangoutsEventBroker;
     var _ = require('underscore');
+    var tools = require('oroui/js/tools');
     var BaseClass = require('oroui/js/base-class');
 
     HangoutsEventBroker = BaseClass.extend({
@@ -15,13 +16,10 @@ define(function(require) {
         /**
          * @inheritDoc
          * @param {Object} options
-         * @param {string} options.token a key to distinguish hangout call process
+         * @param {string=} options.token a key to distinguish hangout call process
          */
         initialize: function(options) {
-            if (!options.token) {
-                throw new TypeError('Missing required option "token"');
-            }
-            _.extend(this, _.pick(options, ['token']));
+            this.token = options.token || tools.createUUID();
             setInterval(_.bind(this._checkStorage, this), 50);
             HangoutsEventBroker.__super__.initialize.call(this, options);
         },
@@ -35,6 +33,15 @@ define(function(require) {
             }
             clearInterval(this.interval);
             HangoutsEventBroker.__super__.dispose.call(this);
+        },
+
+        /**
+         * Returns token for the instance
+         *
+         * @return {string}
+         */
+        getToken: function() {
+            return this.token;
         },
 
         /**

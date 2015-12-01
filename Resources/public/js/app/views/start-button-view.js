@@ -7,14 +7,17 @@ define(function(require) {
     var $ = require('jquery');
     var _ = require('underscore');
     var BaseView = require('oroui/js/app/views/base/view');
+    var HangoutsEventBroker = require('orocrmhangoutscall/js/hangouts-event-broker');
+    var moduleConfig = require('module').config();
 
     StartButtonView = BaseView.extend({
         className: 'start-hangout-button-placeholder',
 
-        /**
-         * @type {Object}
-         */
+        /** @type {Object} */
         hangoutOptions: null,
+
+        /** @type {HangoutsEventBroker} */
+        eventBroker: null,
 
         /**
          * @param {Object} options
@@ -41,9 +44,27 @@ define(function(require) {
          */
         initialize: function(options) {
             this.setHangoutOptions(_.result(options, 'hangoutOptions'));
+            this.eventBroker = new HangoutsEventBroker({
+                listen: {
+                    all: _.bind(this.trigger, this)
+                }
+            });
             StartButtonView.__super__.initialize.call(this, options);
         },
 
+        dispose: function() {
+            if (this.disposed) {
+                return;
+            }
+            if (this.eventBroker) {
+                this.eventBroker.dispose();
+            }
+            StartButtonView.__super__.dispose.apply(this);
+        },
+
+        /**
+         * @inheritDoc
+         */
         _ensureElement: function() {
             StartButtonView.__super__._ensureElement.call(this);
             if (this.className) {
@@ -51,18 +72,66 @@ define(function(require) {
             }
         },
 
+        /**
+         * Updates hangout options
+         *
+         * @param {Object} options
+         */
         setHangoutOptions: function(options) {
             this.hangoutOptions = options || {};
         },
 
+        /**
+         * Combines options for start hangout button
+         */
+        combineHangoutOptions: function() {
+            var token = this.eventBroker.getToken();
+            var options = _.extend({render: 'createhangout'}, this.hangoutOptions);
+            var apps = moduleConfig.initialApps;
+
+            if (!_.isEmpty(apps)) {
+                options.initial_apps = _.map(apps, function(item) {
+                    var startData = {
+                        token: token
+                    };
+
+                    if (item.base_path && moduleConfig.appHost) {
+                        _.extend(startData, {
+                            host: moduleConfig.appHost,
+                            basePath: item.base_path,
+                            app: 'app.js',
+                            iframe: 'iframe.html'
+                        });
+                    }
+
+                    return {
+                        app_id: item.app_id,
+                        start_data: btoa(JSON.stringify(startData)),
+                        app_type: item.app_type ? item.app_type : 'ROOM_APP'
+                    };
+                });
+            }
+
+            return options;
+        },
+
+        /**
+         * Enable the view
+         */
         enable: function() {
             this.$el.removeClass('disabled');
         },
 
+        /**
+         * Disables the view
+         */
         disable: function() {
             this.$el.addClass('disabled');
         },
 
+        /**
+         * @inheritDoc
+         */
         render: function() {
             this.$el.empty();
             this._deferredRender();
@@ -70,6 +139,10 @@ define(function(require) {
             return this;
         },
 
+        /**
+         * Actual render methods, is executed once Google API is ready to use
+         * @protected
+         */
         _render: function() {
             if (!gapi || !gapi.hangout) {
                 this.deferredRender.reject(new Error('Cannot load Google API lib'));
@@ -80,9 +153,7 @@ define(function(require) {
             var $container = $('<div style="display: none"/>');
             $('body').append($container);
 
-            gapi.hangout.render($container[0], $.extend({}, this.hangoutOptions, {
-                render: 'createhangout'
-            }));
+            gapi.hangout.render($container[0], this.combineHangoutOptions());
 
             $container.find('iframe').one('load', _.bind(function(e) {
                 this.$el.html(e.target);
