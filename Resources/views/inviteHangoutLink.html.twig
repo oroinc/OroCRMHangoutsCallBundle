@@ -11,7 +11,7 @@
             modalOptions: {
                 hangoutOptions: hangoutOptions is defined ? hangoutOptions : {}
             }
-        }
+        }|merge(extraComponentOptions is defined ? extraComponentOptions : {})
     }
 } %}
 

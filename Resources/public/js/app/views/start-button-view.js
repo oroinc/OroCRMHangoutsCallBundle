@@ -7,7 +7,6 @@ define(function(require) {
     var $ = require('jquery');
     var _ = require('underscore');
     var BaseView = require('oroui/js/app/views/base/view');
-    var HangoutsEventBroker = require('orocrmhangoutscall/js/hangouts-event-broker');
     var moduleConfig = require('module').config();
 
     StartButtonView = BaseView.extend({
@@ -16,8 +15,8 @@ define(function(require) {
         /** @type {Object} */
         hangoutOptions: null,
 
-        /** @type {HangoutsEventBroker} */
-        eventBroker: null,
+        /** @type {string|null} */
+        token: null,
 
         /**
          * @param {Object} options
@@ -41,23 +40,17 @@ define(function(require) {
          *     moderated -Launch the Hangout app with Control Room enabled.
          * @param {number} options.hangoutOptions.widget_size - Specifies the width of the button.
          *     The default value is 136.
+         * @param {string=} options.token - unique hash
          */
         initialize: function(options) {
             this.setHangoutOptions(_.result(options, 'hangoutOptions'));
-            this.eventBroker = new HangoutsEventBroker({
-                listen: {
-                    all: _.bind(this.trigger, this)
-                }
-            });
+            _.extend(this, _.pick(options, ['token']));
             StartButtonView.__super__.initialize.call(this, options);
         },
 
         dispose: function() {
             if (this.disposed) {
                 return;
-            }
-            if (this.eventBroker) {
-                this.eventBroker.dispose();
             }
             StartButtonView.__super__.dispose.apply(this);
         },
@@ -85,11 +78,11 @@ define(function(require) {
          * Combines options for start hangout button
          */
         combineHangoutOptions: function() {
-            var token = this.eventBroker.getToken();
             var options = _.extend({render: 'createhangout'}, this.hangoutOptions);
             var apps = moduleConfig.initialApps;
 
-            if (!_.isEmpty(apps)) {
+            if (!_.isEmpty(apps) && this.token) {
+                var token = this.token;
                 options.initial_apps = _.map(apps, function(item) {
                     var startData = {
                         token: token
@@ -120,6 +113,7 @@ define(function(require) {
          */
         enable: function() {
             this.$el.removeClass('disabled');
+            this.$el.closest('.control-group').show();
         },
 
         /**
@@ -127,6 +121,7 @@ define(function(require) {
          */
         disable: function() {
             this.$el.addClass('disabled');
+            this.$el.closest('.control-group').hide();
         },
 
         /**

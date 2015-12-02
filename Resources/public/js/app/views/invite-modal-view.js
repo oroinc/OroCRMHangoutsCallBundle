@@ -11,13 +11,17 @@ define(function(require) {
     InviteModalView = Modal.extend({
         className: 'modal oro-modal-normal invite-hangout-modal',
 
-        /**
-         * @type {Object}
-         */
+        /** @type {StartButtonView} */
+        startButtonView: null,
+
+        /** @type {string|null} */
+        token: null,
+
+        /** @type {Object} */
         hangoutOptions: null,
 
         initialize: function(options) {
-            _.extend(this, _.defaults(_.pick(options, ['hangoutOptions']), {
+            _.extend(this, _.defaults(_.pick(options, ['hangoutOptions', 'token']), {
                 hangoutOptions: {}
             }));
 
@@ -38,7 +42,8 @@ define(function(require) {
 
             this.startButtonView = new StartButtonView({
                 autoRender: true,
-                hangoutOptions: this.hangoutOptions
+                hangoutOptions: this.hangoutOptions,
+                token: this.token
             });
 
             if (this.startButtonView.deferredRender) {

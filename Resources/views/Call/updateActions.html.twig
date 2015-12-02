@@ -6,7 +6,7 @@
 {% if entity is not empty %}
     {% set hangoutOptions = hangoutOptions|merge({
         invites: [{
-            id: entity.phoneNumber|escape('html'),
+            id: entity.phoneNumber is not empty ? entity.phoneNumber|escape('html') : '',
             invite_type: 'PHONE'
         }]
     }) %}
@@ -14,7 +14,8 @@
 
 {{ HangoutsCall.renderStartButton({
     class: 'action btn-group',
-    component: 'orocrmhangoutscall/js/app/components/log-call-component',
+    componentModule: 'orocrmhangoutscall/js/app/components/log-call-component',
+    componentName: 'log-hangour-call-component',
     dataAttributes: {
         'action-name': 'hangout-call'
     },
