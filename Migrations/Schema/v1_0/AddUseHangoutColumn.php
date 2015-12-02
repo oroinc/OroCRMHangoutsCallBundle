@@ -32,7 +32,7 @@ class AddUseHangoutColumn implements Migration
             [
                 'oro_options' => [
                     'extend'       => ['owner' => ExtendScope::OWNER_CUSTOM],
-                    'form'         => ['is_enabled' => true],
+                    'form'         => ['is_enabled' => true, 'form_type' => 'checkbox'],
                     'datagrid'     => ['is_visible' => false],
                 ],
                 'notnull'     => false,
