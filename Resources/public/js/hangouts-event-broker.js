@@ -3,6 +3,7 @@ define(function(require) {
 
     var HangoutsEventBroker;
     var _ = require('underscore');
+    var tools = require('oroui/js/tools');
     var BaseClass = require('oroui/js/base-class');
 
     HangoutsEventBroker = BaseClass.extend({
@@ -12,16 +13,17 @@ define(function(require) {
         /** @type {string|null} */
         token: null,
 
+        /** @type {Array} */
+        history: null,
+
         /**
          * @inheritDoc
          * @param {Object} options
-         * @param {string} options.token a key to distinguish hangout call process
+         * @param {string=} options.token a key to distinguish hangout call process
          */
         initialize: function(options) {
-            if (!options.token) {
-                throw new TypeError('Missing required option "token"');
-            }
-            _.extend(this, _.pick(options, ['token']));
+            this.token = options.token || tools.createRandomUUID();
+            this.history = [];
             setInterval(_.bind(this._checkStorage, this), 50);
             HangoutsEventBroker.__super__.initialize.call(this, options);
         },
@@ -38,6 +40,41 @@ define(function(require) {
         },
 
         /**
+         * Returns token for the instance
+         *
+         * @return {string}
+         */
+        getToken: function() {
+            return this.token;
+        },
+
+        /**
+         * Allows to execute handlers related to a specific context for missed events
+         *
+         * @param {Object} context
+         */
+        repeatTriggerFor: function(context) {
+            var message;
+            var events;
+            if (!this._events) {
+                // nothing to replay
+                return;
+            }
+            for (var i = 0; i < this.history.length; i++) {
+                message = this.history[i];
+                events = this._events[message.name];
+                if (!events) {
+                    continue;
+                }
+                for (var j = 0; j < events.length; j++) {
+                    if (events[j].context === context) {
+                        events[j].callback.call(events[j].ctx, message.data);
+                    }
+                }
+            }
+        },
+
+        /**
          * Check the storage and triggers events
          *
          * @protected
@@ -49,6 +86,7 @@ define(function(require) {
                 messages = JSON.parse(messages);
                 for (var i = 0; i < messages.length; i++) {
                     this.trigger(messages[i].name, messages[i].data);
+                    this.history.push(messages[i]);
                 }
             }
         }

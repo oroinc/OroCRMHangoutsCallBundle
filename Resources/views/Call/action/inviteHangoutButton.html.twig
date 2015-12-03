@@ -1,21 +1,39 @@
-{% set cssClass = 'btn icons-holder-text' %}
+{% extends "OroCRMCallBundle:Call:activityLink.html.twig" %}
 
-{% if phone is defined %}
-    {% set invites = [{
-        name: entity is not empty ? entity|escape('html') : '',
-        id: phone|escape('html'),
-        invite_type: 'PHONE'
-    }] %}
-{% elseif email is defined %}
-    {% set invites = [{
-        name: entity is not empty ? entity|escape('html') : '',
-        id: email|escape('html'),
-        invite_type: 'EMAIL',
-    }] %}
-{% endif %}
+{% block action_controll %}
+    {% set cssClass = 'btn icons-holder-text' %}
 
-{% set hangoutOptions = {
-    invites: invites is defined ? invites : []
-} %}
+    {% if phone is defined %}
+        {% set hangoutOptions = {
+            invites: [{
+                name: entity is not empty ? entity|escape('html') : '',
+                id: phone is not empty ? phone|escape('html') : '',
+                invite_type: 'PHONE'
+            }]
+        } %}
+        {% if entity is defined and isCallLogApplicable(entity) %}
+            {# options -- are configuration for log-call button #}
+            {% set extraComponentOptions = {
+                onAppStartOptions: {
+                    widgetComponentOptions: options.widget|merge({
+                        options: options.widget.options|merge({
+                            url: options.dataUrl
+                        })
+                    }),
+                    targetComponentName: 'log-hangour-call-component'
+                }
+            } %}
+        {% endif %}
 
-{% include "OroCRMHangoutsCallBundle::inviteHangoutLink.html.twig" %}
+    {% elseif email is defined %}
+        {% set hangoutOptions = {
+            invites: [{
+                name: entity is not empty ? entity|escape('html') : '',
+                id: email is not empty ? email|escape('html') : '',
+                invite_type: 'EMAIL',
+            }]
+        } %}
+    {% endif %}
+
+    {% include "OroCRMHangoutsCallBundle::inviteHangoutLink.html.twig" %}
+{% endblock %}
