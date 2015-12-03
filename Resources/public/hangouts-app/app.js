@@ -6,7 +6,7 @@
     var iframeSrc = 'https://' + startData.host + '/' + startData.basePath + '/' + startData.iframe;
 
     document.body.insertAdjacentHTML('afterbegin',
-        '<iframe class="proxy" src="' + iframeSrc + '" style="visibility: hidden" />');
+        '<iframe class="proxy" src="' + iframeSrc + '" width="1" height="1" />');
     var iframe = document.querySelector('iframe.proxy');
 
     function publishEvent(name, data) {
@@ -33,7 +33,7 @@
                 this.stop();
             }
             publishEvent('call-started', {
-                startedAt: startedAt.toJSON(),
+                startedAt: startedAt.toISOString(),
                 number: number
             });
             this.interval = setInterval(function() {
@@ -52,7 +52,7 @@
             if (this.isGoing()) {
                 var endedAt = new Date();
                 publishEvent('call-ended', {
-                    endedAt: endedAt.toJSON(),
+                    endedAt: endedAt.toISOString(),
                     duration: endedAt - this.startedAt
                 });
                 clearInterval(this.interval);

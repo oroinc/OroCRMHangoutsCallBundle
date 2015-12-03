@@ -22,7 +22,7 @@ define(function(require) {
          * @param {string=} options.token a key to distinguish hangout call process
          */
         initialize: function(options) {
-            this.token = options.token || tools.createUUID();
+            this.token = options.token || tools.createRandomUUID();
             this.history = [];
             setInterval(_.bind(this._checkStorage, this), 50);
             HangoutsEventBroker.__super__.initialize.call(this, options);

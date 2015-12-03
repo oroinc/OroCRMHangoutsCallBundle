@@ -124,7 +124,7 @@ define(function(require) {
 
             var opts = this.onAppStartOptions;
             if (opts && opts.widgetComponentOptions && opts.targetComponentName) {
-                this.openWidget(
+                this.passEventBrokerToComponentOfWidget(
                     opts.widgetComponentOptions,
                     opts.targetComponentName,
                     eventBroker
@@ -142,9 +142,9 @@ define(function(require) {
          * @param {string} targetComponentName - name of component inside the widget that accepts eventBroker
          * @param {HangoutsEventBroker} eventBroker
          */
-        openWidget: function(widgetComponentOptions, targetComponentName, eventBroker) {
+        passEventBrokerToComponentOfWidget: function(widgetComponentOptions, targetComponentName, eventBroker) {
             var widgetComponent = new WidgetComponent(widgetComponentOptions);
-            widgetComponent.openWidget().done(function(widgetComponent, widget) {
+            widgetComponent.openWidget().done(function(widget) {
                 if (widget && widget.pageComponent(targetComponentName)) {
                     var targetComponent = widget.pageComponent(targetComponentName);
                     if (_.isFunction(targetComponent.setExternalEventBroker)) {
