@@ -5,7 +5,6 @@ namespace OroCRM\Bundle\HangoutsCallBundle\Tests\Unit\DependencyInjection;
 use OroCRM\Bundle\HangoutsCallBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
-
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     /**
