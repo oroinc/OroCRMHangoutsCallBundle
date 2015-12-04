@@ -48,9 +48,8 @@ class CalendarEventPlaceholderFilter
             // event has a calendar and owner of this calendar is current user
             $entity->getCalendar() && $entity->getCalendar()->getOwner() === $this->securityFacade->getLoggedUser() &&
             // calendar event has child events
-            !$entity->getChildEvents()->isEmpty();
+            !$entity->getChildEvents()->isEmpty() &&
             // hangout option should be allowed for this event
-            // TODO: uncomment when CRM-4483 is implemented
-            // && $entity->getUseHangout() !== false;
+            $entity->getUseHangout() !== false;
     }
 }
