@@ -12,7 +12,7 @@ use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 class AddUseHangoutColumn implements Migration
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function up(Schema $schema, QueryBag $queries)
     {
@@ -20,8 +20,7 @@ class AddUseHangoutColumn implements Migration
     }
 
     /**
-     * @param Schema   $schema
-     * @throws SchemaException
+     * @param Schema $schema
      */
     public static function useHangoutColumn(Schema $schema)
     {
