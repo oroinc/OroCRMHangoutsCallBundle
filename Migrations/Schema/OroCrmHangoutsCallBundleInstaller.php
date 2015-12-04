@@ -11,7 +11,6 @@ use OroCRM\Bundle\HangoutsCallBundle\Migrations\Schema\v1_0\AddUseHangoutColumn;
 
 class OroCrmHangoutsCallBundleInstaller implements Installation
 {
-
     /**
      * {@inheritdoc}
      */
