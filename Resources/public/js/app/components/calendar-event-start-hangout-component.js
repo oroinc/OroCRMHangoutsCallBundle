@@ -4,7 +4,7 @@ define(function(require) {
     var CalendarEventStartHangoutComponent;
     var _ = require('underscore');
     var StartButtonView = require('../views/start-button-view');
-    var AutocompleteResultsCollection = require('oroform/js/app/models/autocomplete-results-collection');
+    var CalendarEventGuestCollection = require('orocalendar/js/app/models/calendar-event/guest-collection');
     var BaseComponent = require('oroui/js/app/components/base/component');
 
     CalendarEventStartHangoutComponent = BaseComponent.extend({
@@ -19,9 +19,11 @@ define(function(require) {
 
         initialize: function(options) {
             _.extend(this, _.defaults(_.pick(options, ['calendarEvent', 'hangoutOptions']), {
-                calendarEvent: {},
                 hangoutOptions: {}
             }));
+            if (!this.calendarEvent) {
+                throw new TypeError('Missing required option "calendarEvent"');
+            }
 
             this.startButtonView = new StartButtonView({
                 el: options._sourceElement,
@@ -29,25 +31,27 @@ define(function(require) {
             });
 
             // collection of invited users
-            this.collection = new AutocompleteResultsCollection([], {
+            this.collection = new CalendarEventGuestCollection([], {
                 routeParameters: {
-                    name: 'organization_users',
-                    search_by_id: true
+                    id: this.calendarEvent.id.substr(this.calendarEvent.calendarUid.length + 1)
                 }
             });
 
             var invitedUsersIds = this.calendarEvent.invitedUsers;
             if (invitedUsersIds && invitedUsersIds.length) {
-                this.collection.setQuery(invitedUsersIds.join(','));
+                this.collection.fetch();
             } else {
                 this.startButtonView.disable();
             }
         },
 
         onInvitesSync: function() {
-            var invites = _.map(this.collection.toJSON(), function(item) {
+            var guests = this.collection.filter(function(guest) {
+                return guest.get('invitationStatus') !== 'declined';
+            });
+            var invites = _.map(guests, function(item) {
                 return {
-                    id: item.email,
+                    id: item.get('email'),
                     invite_type: 'EMAIL'
                 };
             });
