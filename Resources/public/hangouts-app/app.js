@@ -6,7 +6,8 @@
     var iframeSrc = 'https://' + startData.host + '/' + startData.basePath + '/' + startData.iframe;
 
     document.body.insertAdjacentHTML('afterbegin',
-        '<iframe class="proxy" src="' + iframeSrc + '" width="1" height="1" />');
+        '<iframe class="proxy" src="' + iframeSrc + '" width="1" height="1" ' +
+            'style="border-width:0;background-color:transparent;" />');
     var iframe = document.querySelector('iframe.proxy');
 
     function publishEvent(name, data) {
