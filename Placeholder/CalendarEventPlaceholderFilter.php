@@ -41,13 +41,15 @@ class CalendarEventPlaceholderFilter
      */
     public function isApplicable($entity = null)
     {
-        return $this->placeholderFilter->isApplicable() &&
+        return $this->placeholderFilter->isEmailApplicable() &&
             is_object($entity) &&
             // entity is calendar event
             $this->doctrineHelper->getEntityClass($entity) == self::CALENDAR_EVENT_CLASS &&
             // event has a calendar and owner of this calendar is current user
             $entity->getCalendar() && $entity->getCalendar()->getOwner() === $this->securityFacade->getLoggedUser() &&
             // calendar event has child events
-            !$entity->getChildEvents()->isEmpty();
+            !$entity->getChildEvents()->isEmpty() &&
+            // hangout option should be allowed for this event
+            $entity->getUseHangout() !== false;
     }
 }

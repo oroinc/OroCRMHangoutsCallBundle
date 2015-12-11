@@ -1,20 +1,23 @@
 {% import 'OroCRMHangoutsCallBundle::macros.html.twig' as HangoutsCall %}
 
-{% set invites = [] %}
+{% if hangoutOptions is not defined %}
+    {% set hangoutOptions = {} %}
+{% endif %}
 {% if entity is not empty %}
-    {% set invites = [{
-        id: entity.phoneNumber|escape('html'),
-        invite_type: 'PHONE'
-    }] %}
+    {% set hangoutOptions = hangoutOptions|merge({
+        invites: [{
+            id: entity.phoneNumber is not empty ? entity.phoneNumber|escape('html') : '',
+            invite_type: 'PHONE'
+        }]
+    }) %}
 {% endif %}
 
 {{ HangoutsCall.renderStartButton({
     class: 'action btn-group',
-    component: 'orocrmhangoutscall/js/app/components/call-log-start-hangout-component',
+    componentModule: 'orocrmhangoutscall/js/app/components/log-call-component',
+    componentName: 'log-hangour-call-component',
     dataAttributes: {
         'action-name': 'hangout-call'
     },
-    hangoutOptions: {
-        invites: invites
-    }
+    hangoutOptions: hangoutOptions
 }) }}

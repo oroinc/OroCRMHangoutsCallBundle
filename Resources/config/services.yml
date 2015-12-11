@@ -2,12 +2,13 @@ parameters:
     orocrm_hangouts_call.placeholder.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\PlaceholderFilter
     orocrm_hangouts_call.placeholder.calendar_event.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\CalendarEventPlaceholderFilter
     orocrm_hangouts_call.placeholder.call.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\CallPlaceholderFilter
+    orocrm_hangouts_call.twig.class: OroCRM\Bundle\HangoutsCallBundle\Twig\OroCRMHangoutsCallExtension
 
 services:
     orocrm_hangouts_call.placeholder.filter:
         class: %orocrm_hangouts_call.placeholder.filter.class%
         arguments:
-            - @oro_config.global
+            - @oro_config.user
             - @oro_ui.user_agent_provider
     orocrm_hangouts_call.placeholder.calendar_event.filter:
         class: %orocrm_hangouts_call.placeholder.calendar_event.filter.class%
@@ -20,3 +21,9 @@ services:
         arguments:
             - @orocrm_hangouts_call.placeholder.filter
             - @oro_entity.doctrine_helper
+    orocrm_hangouts_call.twig.hangoutscall_extension:
+        class: %orocrm_hangouts_call.twig.class%
+        arguments:
+            - @service_container
+        tags:
+            - { name: twig.extension }
