@@ -139,6 +139,10 @@ define(function(require) {
          * @protected
          */
         _render: function() {
+            if (this.disposed) {
+                return;
+            }
+
             if (!gapi || !gapi.hangout) {
                 this.deferredRender.reject(new Error('Cannot load Google API lib'));
                 delete this.deferredRender;

@@ -1,3 +1,7 @@
+oro.calendar:
+    calendarevent:
+            use_hangout.label: Call via Hangout
+
 orocrm.hangoutscall:
     label: "Hangout"
     call:
