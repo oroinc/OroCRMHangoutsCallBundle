@@ -1,0 +1,5 @@
+config:
+    paths:
+        'orocrmhangoutscall/js/app/components/invite-hangout-component': 'bundles/orocrmhangoutscall/js/app/components/invite-hangout-component.js'
+        'orocrmhangoutscall/js/app/components/calendar-event-start-hangout-component': 'bundles/orocrmhangoutscall/js/app/components/calendar-event-start-hangout-component.js'
+        'orocrmhangoutscall/js/app/components/log-call-component': 'bundles/orocrmhangoutscall/js/app/components/log-call-component.js'

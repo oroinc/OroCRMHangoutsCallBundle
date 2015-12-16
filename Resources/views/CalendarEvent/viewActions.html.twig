@@ -1,0 +1,12 @@
+{% set invites = [] %}
+{% for event in entity.childEvents %}
+    {% if event.invitationStatus != 'declined' %}
+        {% set invites = invites|merge([{
+            id: event.calendar.owner.email,
+            invite_type: 'EMAIL'
+        }]) %}
+    {% endif %}
+{% endfor %}
+<div class="pull-left btn-group">
+    {% include "OroCRMHangoutsCallBundle::startHangoutButton.html.twig" %}
+</div>

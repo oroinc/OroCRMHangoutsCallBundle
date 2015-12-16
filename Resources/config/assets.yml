@@ -1,0 +1,3 @@
+css:
+    hangouts:
+        - 'bundles/orocrmhangoutscall/css/less/style.less'
