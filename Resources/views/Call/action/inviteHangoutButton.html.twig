@@ -11,20 +11,6 @@
                 invite_type: 'PHONE'
             }]
         } %}
-        {% if entity is defined and isCallLogApplicable(entity) %}
-            {# options -- are configuration for log-call button #}
-            {% set extraComponentOptions = {
-                onAppStartOptions: {
-                    widgetComponentOptions: options.widget|merge({
-                        options: options.widget.options|merge({
-                            url: options.dataUrl
-                        })
-                    }),
-                    targetComponentName: 'log-hangour-call-component'
-                }
-            } %}
-        {% endif %}
-
     {% elseif email is defined %}
         {% set hangoutOptions = {
             invites: [{
@@ -32,6 +18,26 @@
                 id: email is not empty ? email|escape('html') : '',
                 invite_type: 'EMAIL',
             }]
+        } %}
+    {% endif %}
+
+    {% if entity is defined and isCallLogApplicable(entity) %}
+        {% set dataUrl = path('orocrm_call_create', {
+            entityClass: oro_class_name(entity, true),
+            entityId: entity.id,
+            phone: phone is defined ? phone|escape('html') : (email is defined ? email|escape('html') : null)
+        }) %}
+
+        {# options -- are configuration for log-call button #}
+        {% set extraComponentOptions = {
+            onAppStartOptions: {
+                widgetComponentOptions: options.widget|merge({
+                    options: options.widget.options|merge({
+                        url: dataUrl
+                    })
+                }),
+                targetComponentName: 'log-hangout-call-component'
+            }
         } %}
     {% endif %}
 
