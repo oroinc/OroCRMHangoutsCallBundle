@@ -40,7 +40,8 @@ define(function(require) {
             this.eventBroker = eventBroker;
             this.listenTo(this.eventBroker, {
                 'call-started': this.onCallStart,
-                'call-is-going': this.onCallIsGoing
+                'call-is-going': this.onCallIsGoing,
+                'call-ended': this.onCallEnd
             });
         },
 
@@ -119,13 +120,13 @@ define(function(require) {
 
         /**
          * Handles 'call-started' event
-         *  - update phone number field
+         *  - update phone number field (if number is passed)
          *  - update call datetime field
          *
          * @param {Object} data
          */
         onCallStart: function(data) {
-            if (this.phoneFieldView) {
+            if (this.phoneFieldView && data.number) {
                 var notNumber = /[^\d]/g;
                 // clear format for both numbers (current and new)
                 var oldNumber =  this.phoneFieldView.getValue().replace(notNumber, '');
@@ -150,6 +151,18 @@ define(function(require) {
         onCallIsGoing: function(data) {
             if (this.durationFieldView) {
                 this.durationFieldView.setValue(Math.floor(data.duration / 1000));
+            }
+        },
+
+        /**
+         * Handles 'call-ended' event
+         *  - update duration field
+         *
+         * @param {Object} data
+         */
+        onCallEnd: function(data) {
+            if (this.durationFieldView) {
+                this.durationFieldView.setValue(Math.round(data.duration / 1000));
             }
         }
     });
