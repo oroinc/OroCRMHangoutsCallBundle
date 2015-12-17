@@ -109,7 +109,7 @@ define(function(require) {
             if (phone) {
                 this.hangoutOptions.invites = [{
                     id: phone,
-                    invite_type: 'PHONE'
+                    invite_type: phone.match(/^.+@.+\..+$/) ? 'EMAIL' : 'PHONE'
                 }];
             } else {
                 delete this.hangoutOptions.invites;
