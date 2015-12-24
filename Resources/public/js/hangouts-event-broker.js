@@ -99,7 +99,8 @@ define(function(require) {
          * @param {*} data
          */
         dispatchToApp: function(name, data) {
-            localStorage.setItem('to-app:' + this.token, JSON.stringify({
+            var key = 'to-app:' + this.token;
+            localStorage.setItem(key, JSON.stringify({
                 name: name,
                 data: data
             }));

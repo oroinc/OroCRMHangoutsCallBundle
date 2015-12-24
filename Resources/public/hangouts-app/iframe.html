@@ -18,12 +18,14 @@
             localStorage.setItem('from-app:' + data.token, JSON.stringify(messages));
         });
         // Oro instance to Hangouts App
-        window.addEventListener('storage', function(event) {
-            if (event.key === 'to-app:' + token) {
-                var message = JSON.parse(event.newValue);
-                window.parent.postMessage(message, '*');
+        setInterval(function() {
+            var key = 'to-app:' + token;
+            var event = localStorage.getItem(key);
+            if (event) {
+                localStorage.removeItem(key);
+                window.parent.postMessage(JSON.parse(event), '*');
             }
-        });
+        }, 50);
     </script>
 </head>
 <body></body>
