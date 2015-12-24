@@ -109,8 +109,7 @@ define(function(require) {
                         _.extend(startData, {
                             host: moduleConfig.appHost,
                             basePath: item.base_path,
-                            app: 'app.js',
-                            iframe: 'iframe.html'
+                            app: 'app.js'
                         });
                     }
 

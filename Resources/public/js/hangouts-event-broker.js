@@ -80,15 +80,29 @@ define(function(require) {
          * @protected
          */
         _checkStorage: function() {
-            var messages = localStorage.getItem(this.token);
-            if (messages) {
-                localStorage.removeItem(this.token);
-                messages = JSON.parse(messages);
-                for (var i = 0; i < messages.length; i++) {
-                    this.trigger(messages[i].name, messages[i].data);
-                    this.history.push(messages[i]);
+            var key = 'from-app:' + this.token;
+            var events = localStorage.getItem(key);
+            if (events) {
+                localStorage.removeItem(key);
+                events = JSON.parse(events);
+                for (var i = 0; i < events.length; i++) {
+                    this.trigger(events[i].name, events[i].data);
+                    this.history.push(events[i]);
                 }
             }
+        },
+
+        /**
+         * Pushes message to hangout application
+         *
+         * @param {string} name
+         * @param {*} data
+         */
+        dispatchToApp: function(name, data) {
+            localStorage.setItem('to-app:' + this.token, JSON.stringify({
+                name: name,
+                data: data
+            }));
         }
     });
 
