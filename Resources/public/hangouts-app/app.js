@@ -1,27 +1,89 @@
-/*global gapi*/
+/*global gapi, window*/
 (function() {
     'use strict';
 
     var startData = JSON.parse(atob(gapi.hangout.getStartData()));
-    var iframeSrc = 'https://' + startData.host + '/' + startData.basePath + '/' + startData.iframe;
-
-    document.body.insertAdjacentHTML('afterbegin',
-        '<iframe class="proxy" src="' + iframeSrc + '" width="1" height="1" ' +
-            'style="border-width:0;background-color:transparent;" />');
-    var iframe = document.querySelector('iframe.proxy');
-
-    function publishEvent(name, data) {
-        var event = {
-            token: startData.token,
-            name: name,
-            data: data
+    var origin = window.location.protocol + '//' + startData.host;
+    var baseURL = origin + '/' + startData.basePath + '/';
+    var iframeSrc = baseURL + 'iframe.html';
+    var eventBroker = (function() {
+        var eventBroker = {
+            _events: {},
+            on: function(name, handler) {
+                if (!this._events[name]) {
+                    this._events[name] = [];
+                }
+                this._events[name].push(handler);
+            },
+            off: function(name, handler) {
+                if (!this._events[name]) {
+                    return;
+                }
+                var index = this._events[name].indexOf(handler);
+                if (index !== -1) {
+                    this._events[name].splice(index, 1);
+                }
+                if (!this._events[name].length) {
+                    delete this._events[name];
+                }
+            },
+            trigger: function(name, data) {
+                if (!this._events[name]) {
+                    return;
+                }
+                for (var i = 0; i < this._events[name].length; i++) {
+                    var handler = this._events[name][i];
+                    if (typeof handler === 'function') {
+                        handler(data);
+                    }
+                }
+            },
+            dispatchToInstance: function(name, data) {
+                var event = {
+                    token: startData.token,
+                    name: name,
+                    data: data
+                };
+                iframe.contentWindow.postMessage(event, origin);
+            }
         };
-        iframe.contentWindow.postMessage(event, iframeSrc);
-    }
+        window.addEventListener('message', function(e) {
+            if (e.origin === origin) {
+                eventBroker.trigger(e.data.name, e.data.data);
+            }
+        });
+        return eventBroker;
+    })();
+
+    document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="' + baseURL + 'style.css" />');
+    document.body.insertAdjacentHTML('afterbegin', '<iframe class="app-proxy" src="' + iframeSrc + '" />');
+    document.body.insertAdjacentHTML('beforeend', '<div class="app-page"></div>');
+    var iframe = document.querySelector('iframe.app-proxy');
+    var appPage = document.querySelector('div.app-page');
 
     iframe.onload = function() {
-        publishEvent('application-start');
+        eventBroker.dispatchToInstance('application-start');
     };
+
+    function onFormChange() {
+        var data = {};
+        if (!appPage) {
+            return null;
+        }
+        // @TODO add support for multi-select, checkbox and radio-buttons
+        var elements = appPage.querySelectorAll('input, select, textarea');
+        for (var i = 0; i < elements.length; i++) {
+            data[elements[i].name] = elements[i].value;
+        }
+        eventBroker.dispatchToInstance('form-data-change', data);
+    }
+    appPage.addEventListener('keyup', onFormChange);
+    appPage.addEventListener('change', onFormChange);
+
+    // Update page HTML
+    eventBroker.on('set:appPageHTML', function(appPageHTML) {
+        appPage.innerHTML = appPageHTML;
+    });
 
     // Phone call tracking
     (function() {
@@ -93,12 +155,12 @@
             _onCallStart: function() {
                 var startedAt = new Date(Date.now() - this._call.getDuration());
                 var call = this._call;
-                publishEvent('call-started', {
+                eventBroker.dispatchToInstance('call-started', {
                     startedAt: startedAt.toISOString(),
                     number: this._call.getPhoneNumber()
                 });
                 this._interval = setInterval(function() {
-                    publishEvent('call-is-going', {
+                    eventBroker.dispatchToInstance('call-is-going', {
                         duration: call.getDuration()
                     });
                 }, 1000);
@@ -110,7 +172,7 @@
              */
             _onCallEnd: function() {
                 if (this._call.getDuration()) {
-                    publishEvent('call-ended', {
+                    eventBroker.dispatchToInstance('call-ended', {
                         endedAt: (new Date()).toISOString(),
                         duration: this._call.getDuration()
                     });
@@ -148,11 +210,11 @@
                 if (this.isGoing()) {
                     this.end();
                 }
-                publishEvent('call-started', {
+                eventBroker.dispatchToInstance('call-started', {
                     startedAt: startedAt.toISOString()
                 });
                 this.interval = setInterval(function() {
-                    publishEvent('call-is-going', {
+                    eventBroker.dispatchToInstance('call-is-going', {
                         duration: (new Date()) - startedAt
                     });
                 }, 1000);
@@ -166,7 +228,7 @@
             end: function() {
                 if (this.isGoing()) {
                     var endedAt = new Date();
-                    publishEvent('call-ended', {
+                    eventBroker.dispatchToInstance('call-ended', {
                         endedAt: endedAt.toISOString(),
                         duration: endedAt - this.startedAt
                     });
