@@ -6,6 +6,6 @@ orocrm.hangoutscall:
     messages:
         connection_error: "Cannot start a Google Hangout session. Google API connection error."
     log_call_form:
-        title: Log Call
+        title: Call Information
         field_subject.label: Subject
         field_subject.notes: Additional comments
