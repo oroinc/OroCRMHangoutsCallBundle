@@ -79,6 +79,7 @@
     }
     appPage.addEventListener('keyup', onFormChange);
     appPage.addEventListener('change', onFormChange);
+    appPage.addEventListener('submit', function(event) { event.preventDefault(); });
 
     // Update page HTML
     eventBroker.on('set:appPageHTML', function(appPageHTML) {
