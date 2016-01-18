@@ -24,7 +24,6 @@ define(function(require) {
             _.extend(this, _.defaults(_.pick(options, ['hangoutOptions', 'token']), {
                 hangoutOptions: {}
             }));
-
             InviteModalView.__super__.initialize.call(this, options);
         },
 
@@ -44,6 +43,9 @@ define(function(require) {
                 autoRender: true,
                 hangoutOptions: this.hangoutOptions,
                 token: this.token
+            });
+            this.listenTo(this.startButtonView, 'click', function() {
+                this.trigger('application-start');
             });
 
             if (this.startButtonView.deferredRender) {

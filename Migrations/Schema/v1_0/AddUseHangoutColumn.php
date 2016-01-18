@@ -31,7 +31,10 @@ class AddUseHangoutColumn implements Migration
             [
                 'oro_options' => [
                     'extend'       => ['owner' => ExtendScope::OWNER_CUSTOM],
-                    'form'         => ['is_enabled' => true, 'form_type' => 'checkbox'],
+                    'form'         => [
+                        'is_enabled' => true,
+                        'form_type' => 'orocrm_hangouts_call_use_hangout_checkbox_type'
+                    ],
                     'datagrid'     => ['is_visible' => false],
                 ],
                 'notnull'     => false,

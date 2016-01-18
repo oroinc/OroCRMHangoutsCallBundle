@@ -48,11 +48,28 @@ define(function(require) {
             StartButtonView.__super__.initialize.call(this, options);
         },
 
-        dispose: function() {
-            if (this.disposed) {
-                return;
-            }
-            StartButtonView.__super__.dispose.apply(this);
+        /**
+         * @inheritDoc
+         */
+        delegateEvents: function(events) {
+            $(window).on('blur' + this.eventNamespace(), _.bind(this.onWindowBlur, this));
+            return StartButtonView.__super__.undelegateEvents.call(this, events);
+        },
+
+        /**
+         * @inheritDoc
+         */
+        undelegateEvents: function() {
+            $(window).off(this.eventNamespace());
+            return StartButtonView.__super__.undelegateEvents.call(this);
+        },
+
+        /**
+         * @inheritDoc
+         */
+        remove: function() {
+            $(window).off(this.eventNamespace());
+            return StartButtonView.__super__.remove.call(this);
         },
 
         /**
@@ -92,8 +109,7 @@ define(function(require) {
                         _.extend(startData, {
                             host: moduleConfig.appHost,
                             basePath: item.base_path,
-                            app: 'app.js',
-                            iframe: 'iframe.html'
+                            app: 'app.js'
                         });
                     }
 
@@ -159,6 +175,24 @@ define(function(require) {
                 $container.remove();
                 this._resolveDeferredRender();
             }, this));
+        },
+
+        /**
+         * Handles main window blur event
+         */
+        onWindowBlur: function() {
+            var iframe = this.$('iframe')[0];
+            /**
+             * If "Start a Hangout" iframe get a focus -- assume it was a click
+             * Trigger 'click' with delay
+             *  - to give a time to start hangout dialog
+             *  - in FF iframe is not activeElement yet at the time of main window get blur
+             */
+            _.delay(_.bind(function() {
+                if (iframe === window.document.activeElement) {
+                    this.trigger('click');
+                }
+            }, this), 500);
         }
     });
 
