@@ -3,6 +3,7 @@ parameters:
     orocrm_hangouts_call.placeholder.calendar_event.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\CalendarEventPlaceholderFilter
     orocrm_hangouts_call.placeholder.call.filter.class: OroCRM\Bundle\HangoutsCallBundle\Placeholder\CallPlaceholderFilter
     orocrm_hangouts_call.twig.class: OroCRM\Bundle\HangoutsCallBundle\Twig\OroCRMHangoutsCallExtension
+    orocrm_hangouts_call.type.use_hangout_checkbox.class: OroCRM\Bundle\HangoutsCallBundle\Form\UseHangoutCheckboxType
 
 services:
     orocrm_hangouts_call.placeholder.filter:
@@ -27,3 +28,7 @@ services:
             - @service_container
         tags:
             - { name: twig.extension }
+    orocrm_hangouts_call.type.use_hangout_checkbox:
+        class: %orocrm_hangouts_call.type.use_hangout_checkbox.class%
+        tags:
+            - { name: form.type, alias: orocrm_hangouts_call_use_hangout_checkbox_type }

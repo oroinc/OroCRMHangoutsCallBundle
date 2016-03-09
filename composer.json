@@ -17,12 +17,6 @@
         }
     },
     "target-dir": "src/OroCRM/Bundle/HangoutsCallBundle",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "http://packagist.orocrm.com"
-        }
-    ],
     "require": {
         "php": ">=5.4.9",
         "oro/platform": "1.x-dev",

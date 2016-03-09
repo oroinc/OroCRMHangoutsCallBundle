@@ -53,7 +53,8 @@ define(function(require) {
 
             this.listenTo(this.inviteModal, {
                 hidden: this.onInviteModalHide,
-                fail: this.onStartButtonFail
+                fail: this.onStartButtonFail,
+                'application-start': this.onHangoutAppStart
             });
 
             this.inviteModal.open();

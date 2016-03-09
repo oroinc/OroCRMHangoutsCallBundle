@@ -3,11 +3,14 @@ define(function(require) {
 
     var LogCallStartHangoutComponent;
     var _ = require('underscore');
+    var SubjectFieldView = require('../views/log-call/subject-field-view');
+    var NotesFieldView = require('../views/log-call/notes-field-view');
     var PhoneFieldView = require('../views/log-call/phone-field-view');
     var DurationFieldView = require('../views/log-call/duration-field-view');
     var CallDatetimeFieldView = require('../views/log-call/call-datetime-field-view');
     var StartButtonView = require('../views/start-button-view');
     var HangoutsEventBroker = require('orocrmhangoutscall/js/hangouts-event-broker');
+    var appPageTemplate = require('tpl!orocrmhangoutscall/templates/hangouts-app-log-call-form.html');
     var BaseComponent = require('oroui/js/app/components/base/component');
 
     LogCallStartHangoutComponent = BaseComponent.extend({
@@ -39,8 +42,11 @@ define(function(require) {
 
             this.eventBroker = eventBroker;
             this.listenTo(this.eventBroker, {
+                'application-start': this.onApplicationStart,
                 'call-started': this.onCallStart,
-                'call-is-going': this.onCallIsGoing
+                'call-is-going': this.onCallIsGoing,
+                'call-ended': this.onCallEnd,
+                'form-data-change': this.onFormDataChange
             });
         },
 
@@ -73,8 +79,24 @@ define(function(require) {
 
             var $root = options._sourceElement.closest('form, .ui-dialog');
 
+            // wraps subject field with related view
+            var $subjectField = $root.find('[name$="[subject]"]');
+            if ($subjectField.length) {
+                this.subjectFieldView = new SubjectFieldView({
+                    el: $subjectField[0]
+                });
+            }
+
+            // wraps notes field with related view
+            var $notesField = $root.find('[name$="[notes]"]');
+            if ($notesField.length) {
+                this.notesFieldView = new NotesFieldView({
+                    el: $notesField[0]
+                });
+            }
+
             // wraps phone field with related view
-            var $phoneField = $root.find('[name="orocrm_call_form[phoneNumber]"]');
+            var $phoneField = $root.find('[name$="[phoneNumber]"]');
             if ($phoneField.length) {
                 this.phoneFieldView = new PhoneFieldView({
                     el: $phoneField[0]
@@ -83,7 +105,7 @@ define(function(require) {
             }
 
             // wraps duration field with related view
-            var $durationField = $root.find('[name="orocrm_call_form[duration]"]');
+            var $durationField = $root.find('[name$="[duration]"]');
             if ($durationField.length) {
                 this.durationFieldView = new DurationFieldView({
                     el: $durationField[0]
@@ -91,7 +113,7 @@ define(function(require) {
             }
 
             // wraps callDateTime field with related view
-            var $callDatetimeField = $root.find('[name="orocrm_call_form[callDateTime]"]');
+            var $callDatetimeField = $root.find('[name$="[callDateTime]"]');
             if ($callDatetimeField.length) {
                 this.callDatetimeFieldView = new CallDatetimeFieldView({
                     el: $callDatetimeField[0]
@@ -108,7 +130,7 @@ define(function(require) {
             if (phone) {
                 this.hangoutOptions.invites = [{
                     id: phone,
-                    invite_type: 'PHONE'
+                    invite_type: phone.match(/^.+@.+\..+$/) ? 'EMAIL' : 'PHONE'
                 }];
             } else {
                 delete this.hangoutOptions.invites;
@@ -117,15 +139,19 @@ define(function(require) {
             this.startButtonView.render();
         },
 
+        onApplicationStart: function() {
+            this.eventBroker.dispatchToApp('set:appPageHTML', appPageTemplate({}));
+        },
+
         /**
          * Handles 'call-started' event
-         *  - update phone number field
+         *  - update phone number field (if number is passed)
          *  - update call datetime field
          *
          * @param {Object} data
          */
         onCallStart: function(data) {
-            if (this.phoneFieldView) {
+            if (this.phoneFieldView && data.number) {
                 var notNumber = /[^\d]/g;
                 // clear format for both numbers (current and new)
                 var oldNumber =  this.phoneFieldView.getValue().replace(notNumber, '');
@@ -150,6 +176,33 @@ define(function(require) {
         onCallIsGoing: function(data) {
             if (this.durationFieldView) {
                 this.durationFieldView.setValue(Math.floor(data.duration / 1000));
+            }
+        },
+
+        /**
+         * Handles 'call-ended' event
+         *  - update duration field
+         *
+         * @param {Object} data
+         */
+        onCallEnd: function(data) {
+            if (this.durationFieldView) {
+                this.durationFieldView.setValue(Math.round(data.duration / 1000));
+            }
+        },
+
+        /**
+         * Handles form data changes in hangout app
+         *
+         * @param {Object} data
+         */
+        onFormDataChange: function(data) {
+            if (this.subjectFieldView && data.subject !== void 0) {
+                this.subjectFieldView.setValue(data.subject);
+            }
+
+            if (this.notesFieldView && data.notes !== void 0) {
+                this.notesFieldView.setValue(data.notes);
             }
         }
     });
