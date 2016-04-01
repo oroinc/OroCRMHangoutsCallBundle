@@ -3,8 +3,8 @@
 namespace OroCRM\Bundle\HangoutsCallBundle\Migrations\Schema\v1_0;
 
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\SchemaException;
 
+use Oro\Bundle\EntityBundle\EntityConfig\DatagridScope;
 use Oro\Bundle\EntityExtendBundle\EntityConfig\ExtendScope;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
@@ -35,7 +35,7 @@ class AddUseHangoutColumn implements Migration
                         'is_enabled' => true,
                         'form_type' => 'orocrm_hangouts_call_use_hangout_checkbox_type'
                     ],
-                    'datagrid'     => ['is_visible' => false],
+                    'datagrid'     => ['is_visible' => DatagridScope::IS_VISIBLE_FALSE],
                 ],
                 'notnull'     => false,
             ]
