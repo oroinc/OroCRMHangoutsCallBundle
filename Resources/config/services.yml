@@ -9,23 +9,23 @@ services:
     orocrm_hangouts_call.placeholder.filter:
         class: %orocrm_hangouts_call.placeholder.filter.class%
         arguments:
-            - @oro_config.user
-            - @oro_ui.user_agent_provider
+            - '@oro_config.user'
+            - '@oro_ui.user_agent_provider'
     orocrm_hangouts_call.placeholder.calendar_event.filter:
         class: %orocrm_hangouts_call.placeholder.calendar_event.filter.class%
         arguments:
-            - @orocrm_hangouts_call.placeholder.filter
-            - @oro_entity.doctrine_helper
-            - @oro_security.security_facade
+            - '@orocrm_hangouts_call.placeholder.filter'
+            - '@oro_entity.doctrine_helper'
+            - '@oro_security.security_facade'
     orocrm_hangouts_call.placeholder.call.filter:
         class: %orocrm_hangouts_call.placeholder.call.filter.class%
         arguments:
-            - @orocrm_hangouts_call.placeholder.filter
-            - @oro_entity.doctrine_helper
+            - '@orocrm_hangouts_call.placeholder.filter'
+            - '@oro_entity.doctrine_helper'
     orocrm_hangouts_call.twig.hangoutscall_extension:
         class: %orocrm_hangouts_call.twig.class%
         arguments:
-            - @service_container
+            - '@service_container'
         tags:
             - { name: twig.extension }
     orocrm_hangouts_call.type.use_hangout_checkbox:

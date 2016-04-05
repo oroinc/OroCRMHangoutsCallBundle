@@ -32,20 +32,20 @@ items:
     orocrm_hangoutscall_requirejs_config:
         template: OroCRMHangoutsCallBundle::requirejs.config.js.twig
     orocrm_hangoutscall_email_action_button:
-        applicable: @orocrm_hangouts_call.placeholder.filter->isEmailApplicable()
+        applicable: "@orocrm_hangouts_call.placeholder.filter->isEmailApplicable()"
         template: OroCRMHangoutsCallBundle:Call/action:inviteHangoutButton.html.twig
     orocrm_hangoutscall_phone_action_button:
-        applicable: @orocrm_hangouts_call.placeholder.filter->isPhoneApplicable()
+        applicable: "@orocrm_hangouts_call.placeholder.filter->isPhoneApplicable()"
         template: OroCRMHangoutsCallBundle:Call/action:inviteHangoutButton.html.twig
     orocrm_hangoutscall_calendar_event_widget_view_additional_properties:
-        applicable: @orocrm_hangouts_call.placeholder.filter->isEmailApplicable()
+        applicable: "@orocrm_hangouts_call.placeholder.filter->isEmailApplicable()"
         template: OroCRMHangoutsCallBundle:CalendarEvent/widget:additionalProperties.html.twig
     orocrm_hangoutscall_calendar_event_view_actions:
-        applicable: @orocrm_hangouts_call.placeholder.calendar_event.filter->isApplicable($entity$)
+        applicable: "@orocrm_hangouts_call.placeholder.calendar_event.filter->isApplicable($entity$)"
         template: OroCRMHangoutsCallBundle:CalendarEvent:viewActions.html.twig
     orocrm_hangoutscall_call_log_widget_additional_properties:
-        applicable: @orocrm_hangouts_call.placeholder.filter->isPhoneApplicable()
+        applicable: "@orocrm_hangouts_call.placeholder.filter->isPhoneApplicable()"
         template: OroCRMHangoutsCallBundle:Call/widget:additionalProperties.html.twig
     orocrm_hangoutscall_call_log_update_actions:
-        applicable: @orocrm_hangouts_call.placeholder.call.filter->isApplicable($entity$)
+        applicable: "@orocrm_hangouts_call.placeholder.call.filter->isApplicable($entity$)"
         template: OroCRMHangoutsCallBundle:Call:updateActions.html.twig
