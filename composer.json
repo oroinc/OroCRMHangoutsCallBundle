@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.5.9",
         "oro/platform": "self.version",
-        "oro/call-bundle": "self.version"
+        "oro/crm-call-bundle": "self.version"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
