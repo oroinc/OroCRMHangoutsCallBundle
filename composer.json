@@ -19,8 +19,8 @@
     "target-dir": "src/OroCRM/Bundle/HangoutsCallBundle",
     "require": {
         "php": ">=5.5.9",
-        "oro/platform": "1.10.x-dev",
-        "oro/crm-call-bundle": "1.0.x-dev"
+        "oro/platform": "1.10.*",
+        "oro/crm-call-bundle": "1.0.*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
