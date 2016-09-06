@@ -1,4 +1,4 @@
-system_configuration:
+oro_system_configuration:
     groups:
         google_hangouts_settings:
             title: orocrm.hangoutscall.system_configuration.groups.google_hangouts_settings.title
