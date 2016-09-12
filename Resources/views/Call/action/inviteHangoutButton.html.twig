@@ -22,7 +22,7 @@
     {% endif %}
 
     {% if entity is defined and isCallLogApplicable(entity) %}
-        {% set dataUrl = path('orocrm_call_create', {
+        {% set dataUrl = path('oro_call_create', {
             entityClass: oro_class_name(entity, true),
             entityId: entity.id,
             phone: phone is defined ? phone|escape('html') : (email is defined ? email|escape('html') : null)
