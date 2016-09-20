@@ -1,6 +1,6 @@
 <?php
 
-namespace OroCRM\Bundle\HangoutsCallBundle\Placeholder;
+namespace Oro\Bundle\HangoutsCallBundle\Placeholder;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 use Oro\Bundle\SecurityBundle\SecurityFacade;

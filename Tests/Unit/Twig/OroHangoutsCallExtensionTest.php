@@ -1,9 +1,10 @@
 <?php
-namespace OroCRM\Bundle\HangoutsCallBundle\Tests\Unit\Twig;
 
-use OroCRM\Bundle\HangoutsCallBundle\Twig\OroCRMHangoutsCallExtension;
+namespace Oro\Bundle\HangoutsCallBundle\Tests\Unit\Twig;
 
-class OroCRMHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
+use Oro\Bundle\HangoutsCallBundle\Twig\OroHangoutsCallExtension;
+
+class OroHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
 {
     protected $functions = array(
         'get_hangoutscall_initail_apps' => [
@@ -12,7 +13,7 @@ class OroCRMHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
     );
 
     protected $parameters = array(
-        array('oro_crm_hangouts_call.initial_apps', [
+        array('oro_hangouts.initial_apps', [
             ['app_id' => '100000000001']
         ])
     );
@@ -24,7 +25,7 @@ class OroCRMHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
             ->method('getParameter')
             ->will($this->returnValueMap($this->parameters));
 
-        $extension = new OroCRMHangoutsCallExtension($container);
+        $extension = new OroHangoutsCallExtension($container);
 
         /** @var \Twig_SimpleFunction[] $functions */
         $functions = $extension->getFunctions();
@@ -41,7 +42,7 @@ class OroCRMHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
     public function testGetName()
     {
         $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $extension = new OroCRMHangoutsCallExtension($container);
-        $this->assertEquals('orocrm_hangoutscall_extension', $extension->getName());
+        $extension = new OroHangoutsCallExtension($container);
+        $this->assertEquals('oro_hangoutscall_extension', $extension->getName());
     }
 }

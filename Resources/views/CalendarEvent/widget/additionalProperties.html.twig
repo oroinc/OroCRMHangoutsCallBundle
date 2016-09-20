@@ -8,9 +8,9 @@
     }; %>
     {% set hangoutButton %}
         <div data-action-name="hangout-call"
-             data-page-component-module="orocrmhangoutscall/js/app/components/calendar-event-start-hangout-component"
+             data-page-component-module="orohangoutscall/js/app/components/calendar-event-start-hangout-component"
              data-page-component-options="<%- JSON.stringify(hangoutCallOptions)  %>" class="action"></div>
         </div>
     {% endset %}
-    {{ UI.renderAttribute('orocrm.hangoutscall.label'|trans, hangoutButton) }}
+    {{ UI.renderAttribute('oro.hangoutscall.label'|trans, hangoutButton) }}
 <% } %>

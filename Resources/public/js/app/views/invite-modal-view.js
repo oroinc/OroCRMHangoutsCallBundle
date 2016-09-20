@@ -34,7 +34,7 @@ define(function(require) {
         },
 
         render: function() {
-            this.options.title = __('orocrm.hangoutscall.start_hangouts_dialog.title');
+            this.options.title = __('oro.hangoutscall.start_hangouts_dialog.title');
             this.options.content = modalContentTemplate(this.getContentTemplateData());
 
             InviteModalView.__super__.render.call(this);

@@ -1,8 +1,8 @@
 {
     "name": "oro/crm-hangouts-call-bundle",
     "type": "symfony-bundle",
-    "description": "OroCRM Google Hangouts integration",
-    "keywords": ["OroCRM", "Google Hangouts", "integration"],
+    "description": "Oro Google Hangouts integration",
+    "keywords": ["Oro", "Google Hangouts", "integration"],
     "homepage": "https://github.com/orocrm/OroCRMHangoutsCallBundle.git",
     "license": "OSL-3.0",
     "authors": [
@@ -13,10 +13,10 @@
     ],
     "autoload": {
         "psr-0": {
-            "OroCRM\\Bundle\\HangoutsCallBundle": "src/"
+            "Oro\\Bundle\\HangoutsCallBundle": "src/"
         }
     },
-    "target-dir": "src/OroCRM/Bundle/HangoutsCallBundle",
+    "target-dir": "src/Oro/Bundle/HangoutsCallBundle",
     "require": {
         "php": ">=5.5.9",
         "oro/platform": "1.x-dev",
