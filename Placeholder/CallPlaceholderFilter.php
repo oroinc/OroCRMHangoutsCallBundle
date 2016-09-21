@@ -6,7 +6,7 @@ use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
 
 class CallPlaceholderFilter
 {
-    const CALL_CLASS = 'OroCRM\Bundle\CallBundle\Entity\Call';
+    const CALL_CLASS = 'Oro\Bundle\CallBundle\Entity\Call';
 
     /** @var PlaceholderFilter */
     protected $placeholderFilter;
