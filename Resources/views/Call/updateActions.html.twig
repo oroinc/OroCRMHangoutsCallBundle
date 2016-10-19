@@ -1,4 +1,4 @@
-{% import 'OroCRMHangoutsCallBundle::macros.html.twig' as HangoutsCall %}
+{% import 'OroHangoutsCallBundle::macros.html.twig' as HangoutsCall %}
 
 {% if hangoutOptions is not defined %}
     {% set hangoutOptions = {} %}
@@ -24,7 +24,7 @@
 
 {{ HangoutsCall.renderStartButton({
     class: 'action btn-group',
-    componentModule: 'orocrmhangoutscall/js/app/components/log-call-component',
+    componentModule: 'orohangoutscall/js/app/components/log-call-component',
     componentName: 'log-hangout-call-component',
     dataAttributes: {
         'action-name': 'hangout-call'

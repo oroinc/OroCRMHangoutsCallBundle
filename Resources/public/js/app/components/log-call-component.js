@@ -9,8 +9,8 @@ define(function(require) {
     var DurationFieldView = require('../views/log-call/duration-field-view');
     var CallDatetimeFieldView = require('../views/log-call/call-datetime-field-view');
     var StartButtonView = require('../views/start-button-view');
-    var HangoutsEventBroker = require('orocrmhangoutscall/js/hangouts-event-broker');
-    var appPageTemplate = require('tpl!orocrmhangoutscall/templates/hangouts-app-log-call-form.html');
+    var HangoutsEventBroker = require('orohangoutscall/js/hangouts-event-broker');
+    var appPageTemplate = require('tpl!orohangoutscall/templates/hangouts-app-log-call-form.html');
     var BaseComponent = require('oroui/js/app/components/base/component');
 
     LogCallStartHangoutComponent = BaseComponent.extend({

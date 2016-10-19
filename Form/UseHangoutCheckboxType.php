@@ -1,13 +1,13 @@
 <?php
 
-namespace OroCRM\Bundle\HangoutsCallBundle\Form;
+namespace Oro\Bundle\HangoutsCallBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UseHangoutCheckboxType extends AbstractType
 {
-    const NAME = 'orocrm_hangouts_call_use_hangout_checkbox_type';
+    const NAME = 'oro_hangouts_call_use_hangout_checkbox_type';
 
     /**
      * {@inheritdoc}

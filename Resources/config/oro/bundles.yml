@@ -1,2 +1,2 @@
 bundles:
-    - OroCRM\Bundle\HangoutsCallBundle\OroCRMHangoutsCallBundle
+    - Oro\Bundle\HangoutsCallBundle\OroHangoutsCallBundle
