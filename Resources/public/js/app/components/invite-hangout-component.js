@@ -7,7 +7,7 @@ define(function(require) {
     var __ = require('orotranslation/js/translator');
     var InviteButtonView = require('../views/invite-button-view');
     var InviteModalView = require('../views/invite-modal-view');
-    var HangoutsEventBroker = require('orocrmhangoutscall/js/hangouts-event-broker');
+    var HangoutsEventBroker = require('orohangoutscall/js/hangouts-event-broker');
     var WidgetComponent = require('oroui/js/app/components/widget-component');
     var BaseComponent = require('oroui/js/app/components/base/component');
 
@@ -103,7 +103,7 @@ define(function(require) {
             if (this.inviteModal) {
                 this.inviteModal.close();
             }
-            mediator.execute('showErrorMessage', __('orocrm.hangoutscall.messages.connection_error'));
+            mediator.execute('showErrorMessage', __('oro.hangoutscall.messages.connection_error'));
         },
 
         /**

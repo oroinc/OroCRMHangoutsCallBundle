@@ -1,10 +1,10 @@
 <?php
 
-namespace OroCRM\Bundle\HangoutsCallBundle\Twig;
+namespace Oro\Bundle\HangoutsCallBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class OroCRMHangoutsCallExtension extends \Twig_Extension
+class OroHangoutsCallExtension extends \Twig_Extension
 {
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -29,7 +29,7 @@ class OroCRMHangoutsCallExtension extends \Twig_Extension
         $container = $this->container;
         return array(
             new \Twig_SimpleFunction('get_hangoutscall_initail_apps', function () use ($container) {
-                return $container->getParameter('oro_crm_hangouts_call.initial_apps');
+                return $container->getParameter('oro_hangouts.initial_apps');
             }),
         );
     }
@@ -41,6 +41,6 @@ class OroCRMHangoutsCallExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'orocrm_hangoutscall_extension';
+        return 'oro_hangoutscall_extension';
     }
 }

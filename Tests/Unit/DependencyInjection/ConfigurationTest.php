@@ -1,8 +1,8 @@
 <?php
 
-namespace OroCRM\Bundle\HangoutsCallBundle\Tests\Unit\DependencyInjection;
+namespace Oro\Bundle\HangoutsCallBundle\Tests\Unit\DependencyInjection;
 
-use OroCRM\Bundle\HangoutsCallBundle\DependencyInjection\Configuration;
+use Oro\Bundle\HangoutsCallBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
@@ -78,7 +78,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                             'app_id' => '1088537665390',
                             'app_type' => 'LOCAL_APP',
                             'app_name' => 'OroHangoutsApp',
-                            'base_path' => 'bundles/orocrmhangoutscall/hangouts-app',
+                            'base_path' => 'bundles/orohangoutscall/hangouts-app',
                         ]
                     ],
                     'settings' => $settings

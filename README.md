@@ -1,4 +1,4 @@
-# OroCRMHangoutsCallBundle
+# OroHangoutsCallBundle
 Integration that will allow to make calls using Google Hangouts
 
 By default into "Start a Hangout" button is added information to start OroHangoutApp within Google Hangouts call.
@@ -6,7 +6,7 @@ By default into "Start a Hangout" button is added information to start OroHangou
 
 It is possible to setup other application (or even several applications) to start within Google Hangouts call over configuration file:
 ```yml
-oro_crm_hangouts_call:
+oro_hangouts_call:
     initial_apps:
         - app_id: 1088XXXXX90       # application id code
           app_type: 'LOCAL_APP'
@@ -15,6 +15,6 @@ oro_crm_hangouts_call:
 
 Or turn off starting any application at all
 ```yml
-oro_crm_hangouts_call:
+oro_hangouts_call:
     initial_apps: []
 ```

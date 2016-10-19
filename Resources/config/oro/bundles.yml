@@ -1,2 +1,2 @@
 bundles:
-    - { name: OroCRM\Bundle\HangoutsCallBundle\OroCRMHangoutsCallBundle, priority: 3 }
+    - { name: Oro\Bundle\HangoutsCallBundle\OroHangoutsCallBundle, priority: 3 }

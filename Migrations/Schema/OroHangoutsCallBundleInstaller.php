@@ -1,15 +1,14 @@
 <?php
 
-namespace OroCRM\Bundle\HangoutsCallBundle\Migrations\Schema;
+namespace Oro\Bundle\HangoutsCallBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
 
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
+use Oro\Bundle\HangoutsCallBundle\Migrations\Schema\v1_0\AddUseHangoutColumn;
 
-use OroCRM\Bundle\HangoutsCallBundle\Migrations\Schema\v1_0\AddUseHangoutColumn;
-
-class OroCrmHangoutsCallBundleInstaller implements Installation
+class OroHangoutsCallBundleInstaller implements Installation
 {
     /**
      * {@inheritdoc}
