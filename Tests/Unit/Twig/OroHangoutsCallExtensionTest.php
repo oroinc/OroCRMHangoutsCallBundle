@@ -20,7 +20,7 @@ class OroHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetFunctions()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $container->expects($this->any())
             ->method('getParameter')
             ->will($this->returnValueMap($this->parameters));
@@ -41,7 +41,7 @@ class OroHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $container = $this->getMock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
         $extension = new OroHangoutsCallExtension($container);
         $this->assertEquals('oro_hangoutscall_extension', $extension->getName());
     }
