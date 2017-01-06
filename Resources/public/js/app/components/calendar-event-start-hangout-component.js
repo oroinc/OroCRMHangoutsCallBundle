@@ -61,14 +61,14 @@ define(function(require) {
          * - user is not owner user
          */
         getAttendeesApplicableToInvite: function() {
-            return _.filter(this.calendarEvent.attendees, function (attendee) {
+            return _.filter(this.calendarEvent.attendees, function(attendee) {
                 return attendee.status !== this.declinedStatus &&
                     attendee.email && attendee.email.length > 0 &&
                     attendee.userId != this.ownerUserId;
             }, this);
         },
 
-        renderStartButton: function (attendees) {
+        renderStartButton: function(attendees) {
             var invites = _.map(attendees, function(attendee) {
                 return {
                     id: attendee.email,
@@ -82,7 +82,7 @@ define(function(require) {
             this.startButtonView.render();
         },
 
-        disableStartButton: function () {
+        disableStartButton: function() {
             this.startButtonView.disable();
         }
     });
