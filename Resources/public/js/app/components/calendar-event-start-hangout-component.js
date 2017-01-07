@@ -4,7 +4,6 @@ define(function(require) {
     var CalendarEventStartHangoutComponent;
     var _ = require('underscore');
     var StartButtonView = require('../views/start-button-view');
-    var CalendarEventGuestCollection = require('orocalendar/js/app/models/calendar-event/guest-collection');
     var BaseComponent = require('oroui/js/app/components/base/component');
 
     CalendarEventStartHangoutComponent = BaseComponent.extend({
@@ -13,14 +12,31 @@ define(function(require) {
          */
         calendarEvent: null,
 
-        listen: {
-            'sync collection': 'onInvitesSync'
-        },
+        /**
+         * @type {Object}
+         */
+        hangoutOptions: null,
+
+        /**
+         * @type {Integer}
+         */
+        ownerUserId: null,
+
+        /**
+         * @type {String}
+         */
+        declinedStatus: null,
 
         initialize: function(options) {
-            _.extend(this, _.defaults(_.pick(options, ['calendarEvent', 'hangoutOptions']), {
-                hangoutOptions: {}
-            }));
+            _.extend(
+                this,
+                _.defaults(
+                    _.pick(options, ['calendarEvent', 'hangoutOptions', 'ownerUserId', 'declinedStatus']),
+                    {
+                        hangoutOptions: {}
+                    }
+                )
+            );
             if (!this.calendarEvent) {
                 throw new TypeError('Missing required option "calendarEvent"');
             }
@@ -30,28 +46,32 @@ define(function(require) {
                 hangoutOptions: this.hangoutOptions
             });
 
-            // collection of invited users
-            this.collection = new CalendarEventGuestCollection([], {
-                routeParameters: {
-                    id: this.calendarEvent.id.substr(this.calendarEvent.calendarUid.length + 1)
-                }
-            });
-
-            var invitedUsersIds = this.calendarEvent.invitedUsers;
-            if (invitedUsersIds && invitedUsersIds.length) {
-                this.collection.fetch();
+            var attendees = this.getAttendeesApplicableToInvite();
+            if (attendees.length) {
+                this.renderStartButton(attendees);
             } else {
-                this.startButtonView.disable();
+                this.disableStartButton();
             }
         },
 
-        onInvitesSync: function() {
-            var guests = this.collection.filter(function(guest) {
-                return guest.get('invitationStatus') !== 'declined';
-            });
-            var invites = _.map(guests, function(item) {
+        /**
+         * Get attendees of the event applicable for hangouts invitation:
+         * - email is not empty
+         * - status is not declined
+         * - user is not owner user
+         */
+        getAttendeesApplicableToInvite: function() {
+            return _.filter(this.calendarEvent.attendees, function(attendee) {
+                return attendee.status !== this.declinedStatus &&
+                    attendee.email && attendee.email.length > 0 &&
+                    attendee.userId !== this.ownerUserId;
+            }, this);
+        },
+
+        renderStartButton: function(attendees) {
+            var invites = _.map(attendees, function(attendee) {
                 return {
-                    id: item.get('email'),
+                    id: attendee.email,
                     invite_type: 'EMAIL'
                 };
             });
@@ -60,6 +80,10 @@ define(function(require) {
                 invites: invites
             }));
             this.startButtonView.render();
+        },
+
+        disableStartButton: function() {
+            this.startButtonView.disable();
         }
     });
 
