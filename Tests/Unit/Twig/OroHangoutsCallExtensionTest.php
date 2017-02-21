@@ -3,46 +3,37 @@
 namespace Oro\Bundle\HangoutsCallBundle\Tests\Unit\Twig;
 
 use Oro\Bundle\HangoutsCallBundle\Twig\OroHangoutsCallExtension;
+use Oro\Component\Testing\Unit\TwigExtensionTestCaseTrait;
 
 class OroHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
 {
-    protected $functions = array(
-        'get_hangoutscall_initail_apps' => [
-            ['app_id' => '100000000001']
-        ],
-    );
+    use TwigExtensionTestCaseTrait;
 
-    protected $parameters = array(
-        array('oro_hangouts.initial_apps', [
-            ['app_id' => '100000000001']
-        ])
-    );
+    /** @var OroHangoutsCallExtension */
+    protected $extension;
 
-    public function testGetFunctions()
+    /** @var array */
+    protected $initialAppsParameter = [['app_id' => '100000000001']];
+
+    protected function setUp()
     {
-        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $container->expects($this->any())
-            ->method('getParameter')
-            ->will($this->returnValueMap($this->parameters));
+        $container = self::getContainerBuilder()
+            ->addParameter('oro_hangouts.initial_apps', $this->initialAppsParameter)
+            ->getContainer($this);
 
-        $extension = new OroHangoutsCallExtension($container);
+        $this->extension = new OroHangoutsCallExtension($container);
+    }
 
-        /** @var \Twig_SimpleFunction[] $functions */
-        $functions = $extension->getFunctions();
-        foreach ($functions as $function) {
-            $this->assertInstanceOf('\Twig_SimpleFunction', $function);
-            $this->assertArrayHasKey($function->getName(), $this->functions);
-            $this->assertEquals(
-                $this->functions[$function->getName()],
-                call_user_func($function->getCallable())
-            );
-        }
+    public function testGetInitialApps()
+    {
+        $this->assertEquals(
+            $this->initialAppsParameter,
+            self::callTwigFunction($this->extension, 'get_hangoutscall_initail_apps', [])
+        );
     }
 
     public function testGetName()
     {
-        $container = $this->createMock('Symfony\Component\DependencyInjection\ContainerInterface');
-        $extension = new OroHangoutsCallExtension($container);
-        $this->assertEquals('oro_hangoutscall_extension', $extension->getName());
+        $this->assertEquals('oro_hangoutscall_extension', $this->extension->getName());
     }
 }

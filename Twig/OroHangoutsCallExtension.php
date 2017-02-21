@@ -6,9 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class OroHangoutsCallExtension extends \Twig_Extension
 {
-    /**
-     * @var \Symfony\Component\DependencyInjection\ContainerInterface
-     */
+    /** @var ContainerInterface */
     protected $container;
 
     /**
@@ -26,12 +24,17 @@ class OroHangoutsCallExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        $container = $this->container;
-        return array(
-            new \Twig_SimpleFunction('get_hangoutscall_initail_apps', function () use ($container) {
-                return $container->getParameter('oro_hangouts.initial_apps');
-            }),
-        );
+        return [
+            new \Twig_SimpleFunction('get_hangoutscall_initail_apps', [$this, 'getInitialApps']),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function getInitialApps()
+    {
+        return $this->container->getParameter('oro_hangouts.initial_apps');
     }
 
     /**

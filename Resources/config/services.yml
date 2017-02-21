@@ -2,7 +2,6 @@ parameters:
     oro_hangouts_call.placeholder.filter.class: Oro\Bundle\HangoutsCallBundle\Placeholder\PlaceholderFilter
     oro_hangouts_call.placeholder.calendar_event.filter.class: Oro\Bundle\HangoutsCallBundle\Placeholder\CalendarEventPlaceholderFilter
     oro_hangouts_call.placeholder.call.filter.class: Oro\Bundle\HangoutsCallBundle\Placeholder\CallPlaceholderFilter
-    oro_hangouts_call.twig.class: Oro\Bundle\HangoutsCallBundle\Twig\OroHangoutsCallExtension
     oro_hangouts_call.type.use_hangout_checkbox.class: Oro\Bundle\HangoutsCallBundle\Form\UseHangoutCheckboxType
 
 services:
@@ -23,7 +22,8 @@ services:
             - '@oro_hangouts_call.placeholder.filter'
             - '@oro_entity.doctrine_helper'
     oro_hangouts_call.twig.hangoutscall_extension:
-        class: %oro_hangouts_call.twig.class%
+        class: Oro\Bundle\HangoutsCallBundle\Twig\OroHangoutsCallExtension
+        public: false
         arguments:
             - '@service_container'
         tags:
