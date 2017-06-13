@@ -69,6 +69,11 @@ define(function(require) {
          */
         remove: function() {
             $(window).off(this.eventNamespace());
+            if (this.$iframeContainer) {
+                this.$iframeContainer.find('iframe').off(this.eventNamespace());
+                this.$iframeContainer.remove();
+                delete this.$iframeContainer;
+            }
             return StartButtonView.__super__.remove.call(this);
         },
 
@@ -165,12 +170,12 @@ define(function(require) {
                 return;
             }
 
-            var $container = $('<div style="display: none"/>');
+            var $container;
+            this.$iframeContainer = $container = $('<div style="display: none"/>');
             $('body').append($container);
 
             gapi.hangout.render($container[0], this.combineHangoutOptions());
-
-            $container.find('iframe').one('load', _.bind(function(e) {
+            $container.find('iframe').one('load' + this.eventNamespace(), _.bind(function(e) {
                 this.$el.html(e.target);
                 $container.remove();
                 this._resolveDeferredRender();
