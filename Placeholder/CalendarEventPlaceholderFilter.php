@@ -3,7 +3,7 @@
 namespace Oro\Bundle\HangoutsCallBundle\Placeholder;
 
 use Oro\Bundle\EntityBundle\ORM\DoctrineHelper;
-use Oro\Bundle\SecurityBundle\SecurityFacade;
+use Oro\Bundle\SecurityBundle\Authentication\TokenAccessorInterface;
 
 class CalendarEventPlaceholderFilter
 {
@@ -15,22 +15,22 @@ class CalendarEventPlaceholderFilter
     /** @var DoctrineHelper */
     protected $doctrineHelper;
 
-    /** @var SecurityFacade */
-    protected $securityFacade;
+    /** @var TokenAccessorInterface */
+    protected $tokenAccessor;
 
     /**
      * @param PlaceholderFilter $placeholderFilter
      * @param DoctrineHelper $doctrineHelper
-     * @param SecurityFacade $securityFacade
+     * @param TokenAccessorInterface $tokenAccessor
      */
     public function __construct(
         PlaceholderFilter $placeholderFilter,
         DoctrineHelper $doctrineHelper,
-        SecurityFacade $securityFacade
+        TokenAccessorInterface $tokenAccessor
     ) {
         $this->placeholderFilter = $placeholderFilter;
-        $this->doctrineHelper    = $doctrineHelper;
-        $this->securityFacade    = $securityFacade;
+        $this->doctrineHelper = $doctrineHelper;
+        $this->tokenAccessor = $tokenAccessor;
     }
 
     /**
@@ -46,7 +46,7 @@ class CalendarEventPlaceholderFilter
             // entity is calendar event
             $this->doctrineHelper->getEntityClass($entity) == self::CALENDAR_EVENT_CLASS &&
             // event has a calendar and owner of this calendar is current user
-            $entity->getCalendar() && $entity->getCalendar()->getOwner() === $this->securityFacade->getLoggedUser() &&
+            $entity->getCalendar() && $entity->getCalendar()->getOwner() === $this->tokenAccessor->getUser() &&
             // calendar event has child events
             !$entity->getChildEvents()->isEmpty() &&
             // hangout option should be allowed for this event
