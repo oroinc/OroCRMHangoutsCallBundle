@@ -15,7 +15,7 @@ services:
         arguments:
             - '@oro_hangouts_call.placeholder.filter'
             - '@oro_entity.doctrine_helper'
-            - '@oro_security.security_facade'
+            - '@oro_security.token_accessor'
     oro_hangouts_call.placeholder.call.filter:
         class: %oro_hangouts_call.placeholder.call.filter.class%
         arguments:
