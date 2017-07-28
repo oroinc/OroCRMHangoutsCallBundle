@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "OroCRM Google Hangouts integration",
     "keywords": ["OroCRM", "Google Hangouts", "integration"],
-    "homepage": "https://github.com/orocrm/OroCRMHangoutsCallBundle.git",
+    "homepage": "https://github.com/oroinc/OroCRMHangoutsCallBundle.git",
     "license": "OSL-3.0",
     "authors": [
         {
