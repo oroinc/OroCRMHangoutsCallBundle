@@ -52,8 +52,8 @@ define(function(require) {
             this.inviteModal = new InviteModalView(modalOptions);
 
             this.listenTo(this.inviteModal, {
-                hidden: this.onInviteModalHide,
-                fail: this.onStartButtonFail,
+                'hidden': this.onInviteModalHide,
+                'fail': this.onStartButtonFail,
                 'application-start': this.onHangoutAppStart
             });
 

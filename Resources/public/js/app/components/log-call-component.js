@@ -154,7 +154,7 @@ define(function(require) {
             if (this.phoneFieldView && data.number) {
                 var notNumber = /[^\d]/g;
                 // clear format for both numbers (current and new)
-                var oldNumber =  this.phoneFieldView.getValue().replace(notNumber, '');
+                var oldNumber = this.phoneFieldView.getValue().replace(notNumber, '');
                 var newNumber = data.number.replace(notNumber, '');
                 // compare ending parts of numbers (without country part, it might not exist in new number)
                 if (oldNumber.slice(-newNumber.length) !== newNumber) {
