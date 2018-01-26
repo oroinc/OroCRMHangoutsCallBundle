@@ -3,7 +3,7 @@ define(function(require) {
 
     var CallDatetimeFieldView;
     var moment = require('moment');
-    var datetimeFormatter = require('orolocale/js/formatter/datetime');
+    var datetimeFormatter = require('orolocale/js/formatter/datetime');
     var BaseView = require('oroui/js/app/views/base/view');
 
     CallDatetimeFieldView = BaseView.extend({
