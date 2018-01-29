@@ -17,9 +17,9 @@
     },
     "require": {
         "php": "7.1.*",
-        "oro/platform": "2.6.x-dev",
-        "oro/crm-call-bundle": "2.6.x-dev",
-        "oro/calendar-bundle": "2.6.x-dev"
+        "oro/platform": "2.6.*",
+        "oro/crm-call-bundle": "2.6.*",
+        "oro/calendar-bundle": "2.6.*"
     },
     "repositories": {
         "oro": {
