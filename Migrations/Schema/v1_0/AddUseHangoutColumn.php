@@ -3,7 +3,6 @@
 namespace Oro\Bundle\HangoutsCallBundle\Migrations\Schema\v1_0;
 
 use Doctrine\DBAL\Schema\Schema;
-
 use Oro\Bundle\EntityBundle\EntityConfig\DatagridScope;
 use Oro\Bundle\EntityExtendBundle\EntityConfig\ExtendScope;
 use Oro\Bundle\MigrationBundle\Migration\Migration;
