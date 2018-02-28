@@ -3,10 +3,9 @@
 namespace Oro\Bundle\HangoutsCallBundle\Migrations\Schema;
 
 use Doctrine\DBAL\Schema\Schema;
-
+use Oro\Bundle\HangoutsCallBundle\Migrations\Schema\v1_0\AddUseHangoutColumn;
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
-use Oro\Bundle\HangoutsCallBundle\Migrations\Schema\v1_0\AddUseHangoutColumn;
 
 class OroHangoutsCallBundleInstaller implements Installation
 {
