@@ -19,6 +19,13 @@ define(function(require) {
         token: null,
 
         /**
+         * @inheritDoc
+         */
+        constructor: function StartButtonView() {
+            StartButtonView.__super__.constructor.apply(this, arguments);
+        },
+
+        /**
          * @param {Object} options
          * @param {Object} options.hangoutOptions - options for "Start a Hangout" button
          * @param {string} options.hangoutOptions.topic - Pre-populates the topic field for Hangouts on Air.

@@ -12,6 +12,13 @@ define(function(require) {
             }
         },
 
+        /**
+         * @inheritDoc
+         */
+        constructor: function PhoneFieldView() {
+            PhoneFieldView.__super__.constructor.apply(this, arguments);
+        },
+
         getValue: function() {
             return this.$el.select2('val');
         },

@@ -8,6 +8,13 @@ define(function(require) {
 
     CallDatetimeFieldView = BaseView.extend({
         /**
+         * @inheritDoc
+         */
+        constructor: function CallDatetimeFieldView() {
+            CallDatetimeFieldView.__super__.constructor.apply(this, arguments);
+        },
+
+        /**
          * Read value from the field and returns its JSON format
          *
          * @return {string}

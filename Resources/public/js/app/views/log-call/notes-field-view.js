@@ -8,6 +8,13 @@ define(function(require) {
 
     NotesFieldView = BaseView.extend({
         /**
+         * @inheritDoc
+         */
+        constructor: function NotesFieldView() {
+            NotesFieldView.__super__.constructor.apply(this, arguments);
+        },
+
+        /**
          * Read value from the field
          *
          * @return {string}

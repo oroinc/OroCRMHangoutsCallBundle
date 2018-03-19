@@ -20,6 +20,13 @@ define(function(require) {
         /**
          * @inheritDoc
          */
+        constructor: function LogCallStartHangoutComponent() {
+            LogCallStartHangoutComponent.__super__.constructor.apply(this, arguments);
+        },
+
+        /**
+         * @inheritDoc
+         */
         initialize: function(options) {
             LogCallStartHangoutComponent.__super__.initialize.call(this, options);
             this.hangoutOptions = _.clone(options.hangoutOptions || {});
