@@ -9,6 +9,13 @@ define(function(require) {
             click: function() {
                 this.trigger('invite');
             }
+        },
+
+        /**
+         * @inheritDoc
+         */
+        constructor: function InviteButtonView() {
+            InviteButtonView.__super__.constructor.apply(this, arguments);
         }
     });
 

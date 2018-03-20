@@ -6,6 +6,13 @@ define(function(require) {
     var BaseView = require('oroui/js/app/views/base/view');
 
     DurationFieldView = BaseView.extend({
+        /**
+         * @inheritDoc
+         */
+        constructor: function DurationFieldView() {
+            DurationFieldView.__super__.constructor.apply(this, arguments);
+        },
+
         getValue: function() {
             var value = this.$el.val();
             return numberFormatter.unformatDuration(value);

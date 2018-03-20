@@ -18,6 +18,13 @@ define(function(require) {
 
         /**
          * @inheritDoc
+         */
+        constructor: function HangoutsEventBroker() {
+            HangoutsEventBroker.__super__.constructor.apply(this, arguments);
+        },
+
+        /**
+         * @inheritDoc
          * @param {Object} options
          * @param {string=} options.token a key to distinguish hangout call process
          */

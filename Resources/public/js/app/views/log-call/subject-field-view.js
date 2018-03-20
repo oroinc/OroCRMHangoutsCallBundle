@@ -7,6 +7,13 @@ define(function(require) {
 
     SubjectFieldView = BaseView.extend({
         /**
+         * @inheritDoc
+         */
+        constructor: function SubjectFieldView() {
+            SubjectFieldView.__super__.constructor.apply(this, arguments);
+        },
+
+        /**
          * Read value from the field
          *
          * @return {string}
