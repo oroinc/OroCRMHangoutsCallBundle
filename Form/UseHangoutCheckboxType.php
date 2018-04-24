@@ -3,6 +3,7 @@
 namespace Oro\Bundle\HangoutsCallBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UseHangoutCheckboxType extends AbstractType
@@ -14,6 +15,14 @@ class UseHangoutCheckboxType extends AbstractType
      */
     public function getName()
     {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
         return self::NAME;
     }
 
@@ -22,7 +31,7 @@ class UseHangoutCheckboxType extends AbstractType
      */
     public function getParent()
     {
-        return 'checkbox';
+        return CheckboxType::class;
     }
 
     /**
