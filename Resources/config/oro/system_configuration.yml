@@ -6,7 +6,7 @@ system_configuration:
     fields:
         oro_hangouts_call.enable_google_hangouts_for_email:
             data_type: boolean
-            type: oro_config_checkbox
+            type: Oro\Bundle\ConfigBundle\Form\Type\ConfigCheckbox
             options:
                 label: oro.hangoutscall.system_configuration.fields.enable_google_hangouts_for_email.label
                 required: false
@@ -14,7 +14,7 @@ system_configuration:
             priority: 40
         oro_hangouts_call.enable_google_hangouts_for_phone:
               data_type: boolean
-              type: oro_config_checkbox
+              type: Oro\Bundle\ConfigBundle\Form\Type\ConfigCheckbox
               options:
                   label: oro.hangoutscall.system_configuration.fields.enable_google_hangouts_for_phone.label
                   required: false
