@@ -22,7 +22,8 @@ class ReplaceFormAliases implements Migration
                 'use_hangout',
                 'form',
                 'form_type',
-                UseHangoutCheckboxType::class
+                UseHangoutCheckboxType::class,
+                'oro_hangouts_call_use_hangout_checkbox_type'
             )
         );
     }
