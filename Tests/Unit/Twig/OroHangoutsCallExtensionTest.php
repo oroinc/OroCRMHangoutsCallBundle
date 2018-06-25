@@ -5,7 +5,7 @@ namespace Oro\Bundle\HangoutsCallBundle\Tests\Unit\Twig;
 use Oro\Bundle\HangoutsCallBundle\Twig\OroHangoutsCallExtension;
 use Oro\Component\Testing\Unit\TwigExtensionTestCaseTrait;
 
-class OroHangoutsCallExtensionTest extends \PHPUnit_Framework_TestCase
+class OroHangoutsCallExtensionTest extends \PHPUnit\Framework\TestCase
 {
     use TwigExtensionTestCaseTrait;
 
