@@ -16,9 +16,9 @@
         "exclude-from-classmap": ["/Tests/"]
     },
     "require": {
-        "oro/platform": "3.0.*",
-        "oro/crm-call-bundle": "3.0.*",
-        "oro/calendar-bundle": "3.0.*"
+        "oro/platform": "3.0.x-dev",
+        "oro/crm-call-bundle": "3.0.x-dev",
+        "oro/calendar-bundle": "3.0.x-dev"
     },
     "repositories": {
         "oro": {
