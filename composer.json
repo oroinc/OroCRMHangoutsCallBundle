@@ -16,9 +16,9 @@
         "exclude-from-classmap": ["/Tests/"]
     },
     "require": {
-        "oro/platform": "3.1.*",
-        "oro/crm-call-bundle": "3.1.*",
-        "oro/calendar-bundle": "3.1.*"
+        "oro/platform": "4.0.*",
+        "oro/crm-call-bundle": "4.0.*",
+        "oro/calendar-bundle": "4.0.*"
     },
     "repositories": {
         "oro": {
@@ -34,7 +34,7 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "3.1-dev"
+            "dev-master": "4.0-dev"
         }
     }
 }
