@@ -1,5 +1,3 @@
-{% import 'OroUIBundle::macros.html.twig' as UI %}
-
 {% set options = {
     class: cssClass is defined ? cssClass : '',
     aCss: 'no-hash',
@@ -16,5 +14,7 @@
 } %}
 
 {% block action_controll %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
     {{ UI.clientLink(options) }}
 {% endblock %}
