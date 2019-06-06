@@ -3,8 +3,14 @@
 namespace Oro\Bundle\HangoutsCallBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class OroHangoutsCallExtension extends \Twig_Extension
+/**
+ * Provides a Twig function to retrieve oro_hangouts.initial_apps container parameter value:
+ *   - get_hangoutscall_initail_apps
+ */
+class OroHangoutsCallExtension extends AbstractExtension
 {
     /** @var ContainerInterface */
     protected $container;
@@ -25,7 +31,7 @@ class OroHangoutsCallExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('get_hangoutscall_initail_apps', [$this, 'getInitialApps']),
+            new TwigFunction('get_hangoutscall_initail_apps', [$this, 'getInitialApps']),
         ];
     }
 
