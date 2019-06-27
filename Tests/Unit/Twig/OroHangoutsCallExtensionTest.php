@@ -17,11 +17,7 @@ class OroHangoutsCallExtensionTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $container = self::getContainerBuilder()
-            ->addParameter('oro_hangouts.initial_apps', $this->initialAppsParameter)
-            ->getContainer($this);
-
-        $this->extension = new OroHangoutsCallExtension($container);
+        $this->extension = new OroHangoutsCallExtension($this->initialAppsParameter);
     }
 
     public function testGetInitialApps()
