@@ -10,24 +10,28 @@ services:
         arguments:
             - '@oro_config.user'
             - '@oro_ui.user_agent_provider'
+
     oro_hangouts_call.placeholder.calendar_event.filter:
         class: '%oro_hangouts_call.placeholder.calendar_event.filter.class%'
         arguments:
             - '@oro_hangouts_call.placeholder.filter'
             - '@oro_entity.doctrine_helper'
             - '@oro_security.token_accessor'
+
     oro_hangouts_call.placeholder.call.filter:
         class: '%oro_hangouts_call.placeholder.call.filter.class%'
         arguments:
             - '@oro_hangouts_call.placeholder.filter'
             - '@oro_entity.doctrine_helper'
+
     oro_hangouts_call.twig.hangoutscall_extension:
         class: Oro\Bundle\HangoutsCallBundle\Twig\OroHangoutsCallExtension
         public: false
         arguments:
-            - '@service_container'
+            - '%oro_hangouts.initial_apps%'
         tags:
             - { name: twig.extension }
+
     oro_hangouts_call.type.use_hangout_checkbox:
         class: '%oro_hangouts_call.type.use_hangout_checkbox.class%'
         tags:
