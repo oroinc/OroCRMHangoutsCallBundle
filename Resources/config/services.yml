@@ -7,6 +7,7 @@ parameters:
 services:
     oro_hangouts_call.placeholder.filter:
         class: '%oro_hangouts_call.placeholder.filter.class%'
+        public: true
         arguments:
             - '@oro_config.user'
             - '@oro_ui.user_agent_provider'
