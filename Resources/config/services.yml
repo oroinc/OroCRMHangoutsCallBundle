@@ -7,12 +7,14 @@ parameters:
 services:
     oro_hangouts_call.placeholder.filter:
         class: '%oro_hangouts_call.placeholder.filter.class%'
+        public: true
         arguments:
             - '@oro_config.user'
             - '@oro_ui.user_agent_provider'
 
     oro_hangouts_call.placeholder.calendar_event.filter:
         class: '%oro_hangouts_call.placeholder.calendar_event.filter.class%'
+        public: true
         arguments:
             - '@oro_hangouts_call.placeholder.filter'
             - '@oro_entity.doctrine_helper'
@@ -20,6 +22,7 @@ services:
 
     oro_hangouts_call.placeholder.call.filter:
         class: '%oro_hangouts_call.placeholder.call.filter.class%'
+        public: true
         arguments:
             - '@oro_hangouts_call.placeholder.filter'
             - '@oro_entity.doctrine_helper'
