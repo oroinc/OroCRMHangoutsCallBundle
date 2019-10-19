@@ -6,7 +6,7 @@ define(function(require) {
     var __ = require('orotranslation/js/translator');
     var Modal = require('oroui/js/modal');
     var StartButtonView = require('./start-button-view');
-    var modalContentTemplate = require('tpl!../../../templates/invite-modal-content.html');
+    var modalContentTemplate = require('tpl-loader!../../../templates/invite-modal-content.html');
 
     InviteModalView = Modal.extend({
         className: 'modal oro-modal-normal invite-hangout-modal',

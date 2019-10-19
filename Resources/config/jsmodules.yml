@@ -1,0 +1,8 @@
+configs:
+    orohangoutscall/js/app/views/start-button-view: {}
+dynamic-imports:
+    orohangoutscall:
+        - orohangoutscall/js/app/components/calendar-event-start-hangout-component
+        - orohangoutscall/js/app/components/invite-hangout-component
+        - orohangoutscall/js/app/components/log-call-component
+        - orohangoutscall/js/app/views/start-button-view

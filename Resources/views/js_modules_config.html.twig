@@ -1,0 +1,7 @@
+{% import '@OroAsset/Asset.html.twig' as Asset %}
+{{ Asset.js_modules_config({
+    'orohangoutscall/js/app/views/start-button-view': {
+        initialApps: get_hangoutscall_initail_apps(),
+        appHost: app.request.host
+    }
+}) }}

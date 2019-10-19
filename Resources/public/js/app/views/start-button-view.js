@@ -1,13 +1,14 @@
 /* global gapi */
-define(function(require) {
+define(function(require, exports, module) {
     'use strict';
 
     var StartButtonView;
 
     var $ = require('jquery');
     var _ = require('underscore');
+    var scriptjs = require('scriptjs');
     var BaseView = require('oroui/js/app/views/base/view');
-    var moduleConfig = require('module').config();
+    var moduleConfig = require('module-config').default(module.id);
 
     StartButtonView = BaseView.extend({
         className: 'start-hangout-button-placeholder',
@@ -158,7 +159,7 @@ define(function(require) {
         render: function() {
             this.$el.empty();
             this._deferredRender();
-            require(['//apis.google.com/js/platform.js'], _.bind(this._render, this));
+            scriptjs('//apis.google.com/js/platform.js', this._render.bind(this));
             return this;
         },
 
