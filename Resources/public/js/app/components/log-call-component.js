@@ -1,27 +1,26 @@
 define(function(require) {
     'use strict';
 
-    var LogCallStartHangoutComponent;
-    var _ = require('underscore');
-    var SubjectFieldView = require('../views/log-call/subject-field-view');
-    var NotesFieldView = require('../views/log-call/notes-field-view');
-    var PhoneFieldView = require('../views/log-call/phone-field-view');
-    var DurationFieldView = require('../views/log-call/duration-field-view');
-    var CallDatetimeFieldView = require('../views/log-call/call-datetime-field-view');
-    var StartButtonView = require('../views/start-button-view');
-    var HangoutsEventBroker = require('orohangoutscall/js/hangouts-event-broker');
-    var appPageTemplate = require('tpl-loader!orohangoutscall/templates/hangouts-app-log-call-form.html');
-    var BaseComponent = require('oroui/js/app/components/base/component');
+    const _ = require('underscore');
+    const SubjectFieldView = require('../views/log-call/subject-field-view');
+    const NotesFieldView = require('../views/log-call/notes-field-view');
+    const PhoneFieldView = require('../views/log-call/phone-field-view');
+    const DurationFieldView = require('../views/log-call/duration-field-view');
+    const CallDatetimeFieldView = require('../views/log-call/call-datetime-field-view');
+    const StartButtonView = require('../views/start-button-view');
+    const HangoutsEventBroker = require('orohangoutscall/js/hangouts-event-broker');
+    const appPageTemplate = require('tpl-loader!orohangoutscall/templates/hangouts-app-log-call-form.html');
+    const BaseComponent = require('oroui/js/app/components/base/component');
 
-    LogCallStartHangoutComponent = BaseComponent.extend({
+    const LogCallStartHangoutComponent = BaseComponent.extend({
         /** @type {HangoutsEventBroker} */
         eventBroker: null,
 
         /**
          * @inheritDoc
          */
-        constructor: function LogCallStartHangoutComponent() {
-            LogCallStartHangoutComponent.__super__.constructor.apply(this, arguments);
+        constructor: function LogCallStartHangoutComponent(options) {
+            LogCallStartHangoutComponent.__super__.constructor.call(this, options);
         },
 
         /**
@@ -84,10 +83,10 @@ define(function(require) {
                 token: this.eventBroker.getToken()
             });
 
-            var $root = options._sourceElement.closest('form, .ui-dialog');
+            const $root = options._sourceElement.closest('form, .ui-dialog');
 
             // wraps subject field with related view
-            var $subjectField = $root.find('[name$="[subject]"]');
+            const $subjectField = $root.find('[name$="[subject]"]');
             if ($subjectField.length) {
                 this.subjectFieldView = new SubjectFieldView({
                     el: $subjectField[0]
@@ -95,7 +94,7 @@ define(function(require) {
             }
 
             // wraps notes field with related view
-            var $notesField = $root.find('[name$="[notes]"]');
+            const $notesField = $root.find('[name$="[notes]"]');
             if ($notesField.length) {
                 this.notesFieldView = new NotesFieldView({
                     el: $notesField[0]
@@ -103,7 +102,7 @@ define(function(require) {
             }
 
             // wraps phone field with related view
-            var $phoneField = $root.find('[name$="[phoneNumber]"]');
+            const $phoneField = $root.find('[name$="[phoneNumber]"]');
             if ($phoneField.length) {
                 this.phoneFieldView = new PhoneFieldView({
                     el: $phoneField[0]
@@ -112,7 +111,7 @@ define(function(require) {
             }
 
             // wraps duration field with related view
-            var $durationField = $root.find('[name$="[duration]"]');
+            const $durationField = $root.find('[name$="[duration]"]');
             if ($durationField.length) {
                 this.durationFieldView = new DurationFieldView({
                     el: $durationField[0]
@@ -120,7 +119,7 @@ define(function(require) {
             }
 
             // wraps callDateTime field with related view
-            var $callDatetimeField = $root.find('[name$="[callDateTime]"]');
+            const $callDatetimeField = $root.find('[name$="[callDateTime]"]');
             if ($callDatetimeField.length) {
                 this.callDatetimeFieldView = new CallDatetimeFieldView({
                     el: $callDatetimeField[0]
@@ -159,10 +158,10 @@ define(function(require) {
          */
         onCallStart: function(data) {
             if (this.phoneFieldView && data.number) {
-                var notNumber = /[^\d]/g;
+                const notNumber = /[^\d]/g;
                 // clear format for both numbers (current and new)
-                var oldNumber = this.phoneFieldView.getValue().replace(notNumber, '');
-                var newNumber = data.number.replace(notNumber, '');
+                const oldNumber = this.phoneFieldView.getValue().replace(notNumber, '');
+                const newNumber = data.number.replace(notNumber, '');
                 // compare ending parts of numbers (without country part, it might not exist in new number)
                 if (oldNumber.slice(-newNumber.length) !== newNumber) {
                     this.phoneFieldView.setValue(data.number);

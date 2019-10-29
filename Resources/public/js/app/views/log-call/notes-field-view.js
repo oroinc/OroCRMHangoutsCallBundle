@@ -1,17 +1,16 @@
 define(function(require) {
     'use strict';
 
-    var NotesFieldView;
-    var _ = require('underscore');
-    var BaseView = require('oroui/js/app/views/base/view');
+    const _ = require('underscore');
+    const BaseView = require('oroui/js/app/views/base/view');
     require('jquery.select2');
 
-    NotesFieldView = BaseView.extend({
+    const NotesFieldView = BaseView.extend({
         /**
          * @inheritDoc
          */
-        constructor: function NotesFieldView() {
-            NotesFieldView.__super__.constructor.apply(this, arguments);
+        constructor: function NotesFieldView(options) {
+            NotesFieldView.__super__.constructor.call(this, options);
         },
 
         /**

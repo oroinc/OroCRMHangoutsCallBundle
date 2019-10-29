@@ -2,12 +2,12 @@
 (function() {
     'use strict';
 
-    var startData = JSON.parse(atob(gapi.hangout.getStartData()));
-    var origin = window.location.protocol + '//' + startData.host;
-    var baseURL = origin + '/' + startData.basePath + '/';
-    var iframeSrc = baseURL + 'iframe.html';
-    var eventBroker = (function() {
-        var eventBroker = {
+    const startData = JSON.parse(atob(gapi.hangout.getStartData()));
+    const origin = window.location.protocol + '//' + startData.host;
+    const baseURL = origin + '/' + startData.basePath + '/';
+    const iframeSrc = baseURL + 'iframe.html';
+    const eventBroker = (function() {
+        const eventBroker = {
             _events: {},
             on: function(name, handler) {
                 if (!this._events[name]) {
@@ -19,7 +19,7 @@
                 if (!this._events[name]) {
                     return;
                 }
-                var index = this._events[name].indexOf(handler);
+                const index = this._events[name].indexOf(handler);
                 if (index !== -1) {
                     this._events[name].splice(index, 1);
                 }
@@ -31,15 +31,15 @@
                 if (!this._events[name]) {
                     return;
                 }
-                for (var i = 0; i < this._events[name].length; i++) {
-                    var handler = this._events[name][i];
+                for (let i = 0; i < this._events[name].length; i++) {
+                    const handler = this._events[name][i];
                     if (typeof handler === 'function') {
                         handler(data);
                     }
                 }
             },
             dispatchToInstance: function(name, data) {
-                var event = {
+                const event = {
                     token: startData.token,
                     name: name,
                     data: data
@@ -58,21 +58,21 @@
     document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="' + baseURL + 'style.css" />');
     document.body.insertAdjacentHTML('afterbegin', '<iframe class="app-proxy" src="' + iframeSrc + '" />');
     document.body.insertAdjacentHTML('beforeend', '<div class="app-page"></div>');
-    var iframe = document.querySelector('iframe.app-proxy');
-    var appPage = document.querySelector('div.app-page');
+    const iframe = document.querySelector('iframe.app-proxy');
+    const appPage = document.querySelector('div.app-page');
 
     iframe.onload = function() {
         eventBroker.dispatchToInstance('application-start');
     };
 
     function onFormChange() {
-        var data = {};
+        const data = {};
         if (!appPage) {
             return null;
         }
         // @TODO add support for multi-select, checkbox and radio-buttons
-        var elements = appPage.querySelectorAll('input, select, textarea');
-        for (var i = 0; i < elements.length; i++) {
+        const elements = appPage.querySelectorAll('input, select, textarea');
+        for (let i = 0; i < elements.length; i++) {
             data[elements[i].name] = elements[i].value;
         }
         eventBroker.dispatchToInstance('form-data-change', data);
@@ -90,7 +90,7 @@
 
     // Phone call tracking
     (function() {
-        var phoneCallHandler = {
+        const phoneCallHandler = {
             /** @type {number|null} */
             _interval: null,
 
@@ -156,8 +156,8 @@
              * @protected
              */
             _onCallStart: function() {
-                var startedAt = new Date(Date.now() - this._call.getDuration());
-                var call = this._call;
+                const startedAt = new Date(Date.now() - this._call.getDuration());
+                const call = this._call;
                 eventBroker.dispatchToInstance('call-started', {
                     startedAt: startedAt.toISOString(),
                     number: this._call.getPhoneNumber()
@@ -186,7 +186,7 @@
         phoneCallHandler._onStateChange = phoneCallHandler._onStateChange.bind(phoneCallHandler);
 
         // a call is already started
-        var calls = gapi.hangout.telephone.getCalls();
+        const calls = gapi.hangout.telephone.getCalls();
         if (calls[0]) {
             phoneCallHandler.track(calls[0]);
         }
@@ -199,7 +199,7 @@
 
     // Other calls tracking
     (function() {
-        var otherCallHandler = {
+        const otherCallHandler = {
             /** @type {number|null} */
             interval: null,
 
@@ -209,7 +209,7 @@
              *  - starts interval of publishing 'call-is-going' event
              */
             start: function() {
-                var startedAt = this.startedAt = new Date();
+                const startedAt = this.startedAt = new Date();
                 if (this.isGoing()) {
                     this.end();
                 }
@@ -230,7 +230,7 @@
              */
             end: function() {
                 if (this.isGoing()) {
-                    var endedAt = new Date();
+                    const endedAt = new Date();
                     eventBroker.dispatchToInstance('call-ended', {
                         endedAt: endedAt.toISOString(),
                         duration: endedAt - this.startedAt
@@ -252,7 +252,7 @@
 
         gapi.hangout.onEnabledParticipantsChanged.add(function() {
             // participants without OroHangoutApp and person id not is empty (not phone call)
-            var participants = gapi.hangout.getParticipants().filter(function(participant) {
+            const participants = gapi.hangout.getParticipants().filter(function(participant) {
                 return participant.hasAppEnabled === false && participant.person.id !== '';
             });
 

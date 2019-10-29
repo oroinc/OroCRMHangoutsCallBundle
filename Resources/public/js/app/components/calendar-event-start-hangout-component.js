@@ -1,12 +1,11 @@
 define(function(require) {
     'use strict';
 
-    var CalendarEventStartHangoutComponent;
-    var _ = require('underscore');
-    var StartButtonView = require('../views/start-button-view');
-    var BaseComponent = require('oroui/js/app/components/base/component');
+    const _ = require('underscore');
+    const StartButtonView = require('../views/start-button-view');
+    const BaseComponent = require('oroui/js/app/components/base/component');
 
-    CalendarEventStartHangoutComponent = BaseComponent.extend({
+    const CalendarEventStartHangoutComponent = BaseComponent.extend({
         /**
          * @type {Object}
          */
@@ -30,8 +29,8 @@ define(function(require) {
         /**
          * @inheritDoc
          */
-        constructor: function CalendarEventStartHangoutComponent() {
-            CalendarEventStartHangoutComponent.__super__.constructor.apply(this, arguments);
+        constructor: function CalendarEventStartHangoutComponent(options) {
+            CalendarEventStartHangoutComponent.__super__.constructor.call(this, options);
         },
 
         /**
@@ -56,7 +55,7 @@ define(function(require) {
                 hangoutOptions: this.hangoutOptions
             });
 
-            var attendees = this.getAttendeesApplicableToInvite();
+            const attendees = this.getAttendeesApplicableToInvite();
             if (attendees.length) {
                 this.renderStartButton(attendees);
             } else {
@@ -79,7 +78,7 @@ define(function(require) {
         },
 
         renderStartButton: function(attendees) {
-            var invites = _.map(attendees, function(attendee) {
+            const invites = _.map(attendees, function(attendee) {
                 return {
                     id: attendee.email,
                     invite_type: 'EMAIL'

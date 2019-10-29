@@ -1,17 +1,16 @@
 define(function(require) {
     'use strict';
 
-    var InviteHangoutComponent;
-    var _ = require('underscore');
-    var mediator = require('oroui/js/mediator');
-    var __ = require('orotranslation/js/translator');
-    var InviteButtonView = require('../views/invite-button-view');
-    var InviteModalView = require('../views/invite-modal-view');
-    var HangoutsEventBroker = require('orohangoutscall/js/hangouts-event-broker');
-    var WidgetComponent = require('oroui/js/app/components/widget-component');
-    var BaseComponent = require('oroui/js/app/components/base/component');
+    const _ = require('underscore');
+    const mediator = require('oroui/js/mediator');
+    const __ = require('orotranslation/js/translator');
+    const InviteButtonView = require('../views/invite-button-view');
+    const InviteModalView = require('../views/invite-modal-view');
+    const HangoutsEventBroker = require('orohangoutscall/js/hangouts-event-broker');
+    const WidgetComponent = require('oroui/js/app/components/widget-component');
+    const BaseComponent = require('oroui/js/app/components/base/component');
 
-    InviteHangoutComponent = BaseComponent.extend({
+    const InviteHangoutComponent = BaseComponent.extend({
         /** @type {Object} */
         modalOptions: null,
 
@@ -24,8 +23,8 @@ define(function(require) {
         /**
          * @inheritDoc
          */
-        constructor: function InviteHangoutComponent() {
-            InviteHangoutComponent.__super__.constructor.apply(this, arguments);
+        constructor: function InviteHangoutComponent(options) {
+            InviteHangoutComponent.__super__.constructor.call(this, options);
         },
 
         /**
@@ -53,7 +52,7 @@ define(function(require) {
         openInviteModal: function() {
             this.ensureEventBroker();
 
-            var modalOptions = _.extend({
+            const modalOptions = _.extend({
                 token: this.eventBroker.getToken()
             }, this.modalOptions);
             this.inviteModal = new InviteModalView(modalOptions);
@@ -126,11 +125,11 @@ define(function(require) {
             }
 
             // unbind eventBroker to pass into some other component (if there's one)
-            var eventBroker = this.eventBroker;
+            const eventBroker = this.eventBroker;
             this.stopListening(this.eventBroker);
             delete this.eventBroker;
 
-            var opts = this.onAppStartOptions;
+            const opts = this.onAppStartOptions;
             if (opts && opts.widgetComponentOptions && opts.targetComponentName) {
                 this.passEventBrokerToComponentOfWidget(
                     opts.widgetComponentOptions,
@@ -151,10 +150,10 @@ define(function(require) {
          * @param {HangoutsEventBroker} eventBroker
          */
         passEventBrokerToComponentOfWidget: function(widgetComponentOptions, targetComponentName, eventBroker) {
-            var widgetComponent = new WidgetComponent(widgetComponentOptions);
+            const widgetComponent = new WidgetComponent(widgetComponentOptions);
             widgetComponent.openWidget().done(function(widget) {
                 if (widget && widget.pageComponent(targetComponentName)) {
-                    var targetComponent = widget.pageComponent(targetComponentName);
+                    const targetComponent = widget.pageComponent(targetComponentName);
                     if (_.isFunction(targetComponent.setExternalEventBroker)) {
                         targetComponent.setExternalEventBroker(eventBroker);
                         return;
