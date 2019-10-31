@@ -1,16 +1,15 @@
 define(function(require) {
     'use strict';
 
-    var SubjectFieldView;
-    var BaseView = require('oroui/js/app/views/base/view');
+    const BaseView = require('oroui/js/app/views/base/view');
     require('jquery.select2');
 
-    SubjectFieldView = BaseView.extend({
+    const SubjectFieldView = BaseView.extend({
         /**
          * @inheritDoc
          */
-        constructor: function SubjectFieldView() {
-            SubjectFieldView.__super__.constructor.apply(this, arguments);
+        constructor: function SubjectFieldView(options) {
+            SubjectFieldView.__super__.constructor.call(this, options);
         },
 
         /**

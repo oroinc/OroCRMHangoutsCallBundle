@@ -1,17 +1,16 @@
 define(function(require) {
     'use strict';
 
-    var CallDatetimeFieldView;
-    var moment = require('moment');
-    var datetimeFormatter = require('orolocale/js/formatter/datetime');
-    var BaseView = require('oroui/js/app/views/base/view');
+    const moment = require('moment');
+    const datetimeFormatter = require('orolocale/js/formatter/datetime');
+    const BaseView = require('oroui/js/app/views/base/view');
 
-    CallDatetimeFieldView = BaseView.extend({
+    const CallDatetimeFieldView = BaseView.extend({
         /**
          * @inheritDoc
          */
-        constructor: function CallDatetimeFieldView() {
-            CallDatetimeFieldView.__super__.constructor.apply(this, arguments);
+        constructor: function CallDatetimeFieldView(options) {
+            CallDatetimeFieldView.__super__.constructor.call(this, options);
         },
 
         /**
@@ -20,7 +19,7 @@ define(function(require) {
          * @return {string}
          */
         getValue: function() {
-            var value = this.$el.val();
+            const value = this.$el.val();
             return moment(value).toJSON();
         },
 

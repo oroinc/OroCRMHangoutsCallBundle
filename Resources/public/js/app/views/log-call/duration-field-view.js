@@ -1,25 +1,24 @@
 define(function(require) {
     'use strict';
 
-    var DurationFieldView;
-    var numberFormatter = require('orolocale/js/formatter/number');
-    var BaseView = require('oroui/js/app/views/base/view');
+    const numberFormatter = require('orolocale/js/formatter/number');
+    const BaseView = require('oroui/js/app/views/base/view');
 
-    DurationFieldView = BaseView.extend({
+    const DurationFieldView = BaseView.extend({
         /**
          * @inheritDoc
          */
-        constructor: function DurationFieldView() {
-            DurationFieldView.__super__.constructor.apply(this, arguments);
+        constructor: function DurationFieldView(options) {
+            DurationFieldView.__super__.constructor.call(this, options);
         },
 
         getValue: function() {
-            var value = this.$el.val();
+            const value = this.$el.val();
             return numberFormatter.unformatDuration(value);
         },
 
         setValue: function(value) {
-            var duration = numberFormatter.formatDuration(value);
+            const duration = numberFormatter.formatDuration(value);
             this.$el.val(duration).trigger('change');
         }
     });

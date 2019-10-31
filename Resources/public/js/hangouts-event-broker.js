@@ -1,12 +1,11 @@
 define(function(require) {
     'use strict';
 
-    var HangoutsEventBroker;
-    var _ = require('underscore');
-    var tools = require('oroui/js/tools');
-    var BaseClass = require('oroui/js/base-class');
+    const _ = require('underscore');
+    const tools = require('oroui/js/tools');
+    const BaseClass = require('oroui/js/base-class');
 
-    HangoutsEventBroker = BaseClass.extend({
+    const HangoutsEventBroker = BaseClass.extend({
         /** @type {number|null} */
         interval: null,
 
@@ -19,8 +18,8 @@ define(function(require) {
         /**
          * @inheritDoc
          */
-        constructor: function HangoutsEventBroker() {
-            HangoutsEventBroker.__super__.constructor.apply(this, arguments);
+        constructor: function HangoutsEventBroker(options) {
+            HangoutsEventBroker.__super__.constructor.call(this, options);
         },
 
         /**
@@ -61,19 +60,19 @@ define(function(require) {
          * @param {Object} context
          */
         repeatTriggerFor: function(context) {
-            var message;
-            var events;
+            let message;
+            let events;
             if (!this._events) {
                 // nothing to replay
                 return;
             }
-            for (var i = 0; i < this.history.length; i++) {
+            for (let i = 0; i < this.history.length; i++) {
                 message = this.history[i];
                 events = this._events[message.name];
                 if (!events) {
                     continue;
                 }
-                for (var j = 0; j < events.length; j++) {
+                for (let j = 0; j < events.length; j++) {
                     if (events[j].context === context) {
                         events[j].callback.call(events[j].ctx, message.data);
                     }
@@ -87,12 +86,12 @@ define(function(require) {
          * @protected
          */
         _checkStorage: function() {
-            var key = 'from-app:' + this.token;
-            var events = localStorage.getItem(key);
+            const key = 'from-app:' + this.token;
+            let events = localStorage.getItem(key);
             if (events) {
                 localStorage.removeItem(key);
                 events = JSON.parse(events);
-                for (var i = 0; i < events.length; i++) {
+                for (let i = 0; i < events.length; i++) {
                     this.trigger(events[i].name, events[i].data);
                     this.history.push(events[i]);
                 }
@@ -106,7 +105,7 @@ define(function(require) {
          * @param {*} data
          */
         dispatchToApp: function(name, data) {
-            var key = 'to-app:' + this.token;
+            const key = 'to-app:' + this.token;
             localStorage.setItem(key, JSON.stringify({
                 name: name,
                 data: data

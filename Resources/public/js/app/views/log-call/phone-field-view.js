@@ -1,11 +1,10 @@
 define(function(require) {
     'use strict';
 
-    var PhoneFieldView;
-    var BaseView = require('oroui/js/app/views/base/view');
+    const BaseView = require('oroui/js/app/views/base/view');
     require('jquery.select2');
 
-    PhoneFieldView = BaseView.extend({
+    const PhoneFieldView = BaseView.extend({
         events: {
             change: function() {
                 this.trigger('change', this.$el.val());
@@ -15,8 +14,8 @@ define(function(require) {
         /**
          * @inheritDoc
          */
-        constructor: function PhoneFieldView() {
-            PhoneFieldView.__super__.constructor.apply(this, arguments);
+        constructor: function PhoneFieldView(options) {
+            PhoneFieldView.__super__.constructor.call(this, options);
         },
 
         getValue: function() {

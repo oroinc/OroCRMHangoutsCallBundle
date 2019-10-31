@@ -1,14 +1,13 @@
 define(function(require) {
     'use strict';
 
-    var InviteModalView;
-    var _ = require('underscore');
-    var __ = require('orotranslation/js/translator');
-    var Modal = require('oroui/js/modal');
-    var StartButtonView = require('./start-button-view');
-    var modalContentTemplate = require('tpl-loader!../../../templates/invite-modal-content.html');
+    const _ = require('underscore');
+    const __ = require('orotranslation/js/translator');
+    const Modal = require('oroui/js/modal');
+    const StartButtonView = require('./start-button-view');
+    const modalContentTemplate = require('tpl-loader!../../../templates/invite-modal-content.html');
 
-    InviteModalView = Modal.extend({
+    const InviteModalView = Modal.extend({
         className: 'modal oro-modal-normal invite-hangout-modal',
 
         /** @type {StartButtonView} */
@@ -23,8 +22,8 @@ define(function(require) {
         /**
          * @inheritDoc
          */
-        constructor: function InviteModalView() {
-            InviteModalView.__super__.constructor.apply(this, arguments);
+        constructor: function InviteModalView(options) {
+            InviteModalView.__super__.constructor.call(this, options);
         },
 
         /**

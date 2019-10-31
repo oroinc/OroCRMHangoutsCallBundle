@@ -2,15 +2,13 @@
 define(function(require, exports, module) {
     'use strict';
 
-    var StartButtonView;
+    const $ = require('jquery');
+    const _ = require('underscore');
+    const scriptjs = require('scriptjs');
+    const BaseView = require('oroui/js/app/views/base/view');
+    const moduleConfig = require('module-config').default(module.id);
 
-    var $ = require('jquery');
-    var _ = require('underscore');
-    var scriptjs = require('scriptjs');
-    var BaseView = require('oroui/js/app/views/base/view');
-    var moduleConfig = require('module-config').default(module.id);
-
-    StartButtonView = BaseView.extend({
+    const StartButtonView = BaseView.extend({
         className: 'start-hangout-button-placeholder',
 
         /** @type {Object} */
@@ -22,8 +20,8 @@ define(function(require, exports, module) {
         /**
          * @inheritDoc
          */
-        constructor: function StartButtonView() {
-            StartButtonView.__super__.constructor.apply(this, arguments);
+        constructor: function StartButtonView(options) {
+            StartButtonView.__super__.constructor.call(this, options);
         },
 
         /**
@@ -108,13 +106,13 @@ define(function(require, exports, module) {
          * Combines options for start hangout button
          */
         combineHangoutOptions: function() {
-            var options = _.extend({render: 'createhangout'}, this.hangoutOptions);
-            var apps = moduleConfig.initialApps;
+            const options = _.extend({render: 'createhangout'}, this.hangoutOptions);
+            const apps = moduleConfig.initialApps;
 
             if (!_.isEmpty(apps) && this.token) {
-                var token = this.token;
+                const token = this.token;
                 options.initial_apps = _.map(apps, function(item) {
-                    var startData = {
+                    const startData = {
                         token: token
                     };
 
@@ -178,7 +176,7 @@ define(function(require, exports, module) {
                 return;
             }
 
-            var $container;
+            let $container;
             this.$iframeContainer = $container = $('<div style="display: none"/>');
             $('body').append($container);
 
@@ -194,7 +192,7 @@ define(function(require, exports, module) {
          * Handles main window blur event
          */
         onWindowBlur: function() {
-            var iframe = this.$('iframe')[0];
+            const iframe = this.$('iframe')[0];
             /**
              * If "Start a Hangout" iframe get a focus -- assume it was a click
              * Trigger 'click' with delay
