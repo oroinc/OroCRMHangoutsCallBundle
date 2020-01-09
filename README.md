@@ -23,3 +23,9 @@ Or turn off starting any application at all
 oro_hangouts_call:
     initial_apps: []
 ```
+
+Resources
+---------
+
+  * [OroCommerce, OroCRM and OroPlatform Documentation](https://doc.oroinc.com)
+  * [Contributing](https://doc.oroinc.com/community/contribute/)
