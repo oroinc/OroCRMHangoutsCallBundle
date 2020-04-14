@@ -15,7 +15,7 @@ class OroHangoutsCallExtensionTest extends \PHPUnit\Framework\TestCase
     /** @var array */
     protected $initialAppsParameter = [['app_id' => '100000000001']];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extension = new OroHangoutsCallExtension($this->initialAppsParameter);
     }
