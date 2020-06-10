@@ -2,7 +2,7 @@
 
 OroHangoutsCallBundle provides integration with [Google Hangouts](https://hangouts.google.com/) for Oro applications and enables users to appoint Google Hangout calls for [Calendar Events](https://github.com/oroinc/OroCalendarBundle).
 
-The bundle enables developers to configure default Google Hangout integration data in application parameters in YAML files and helps admin users to enable invite for Google hangout calls by phone and email in [System Configuration](https://github.com/oroinc/platform/tree/master/src/Oro/Bundle/ConfigBundle) UI.
+The bundle enables developers to configure default Google Hangout integration data in application parameters in YAML files and helps admin users to enable invite for Google hangout calls by phone and email in [System Configuration](https://github.com/oroinc/platform/tree/4.1/src/Oro/Bundle/ConfigBundle) UI.
 
 ## Overview
 
