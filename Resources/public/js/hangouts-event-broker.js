@@ -1,7 +1,6 @@
 define(function(require) {
     'use strict';
 
-    const _ = require('underscore');
     const tools = require('oroui/js/tools');
     const BaseClass = require('oroui/js/base-class');
 
@@ -30,7 +29,7 @@ define(function(require) {
         initialize: function(options) {
             this.token = options.token || tools.createRandomUUID();
             this.history = [];
-            setInterval(_.bind(this._checkStorage, this), 50);
+            setInterval(this._checkStorage.bind(this), 50);
             HangoutsEventBroker.__super__.initialize.call(this, options);
         },
 

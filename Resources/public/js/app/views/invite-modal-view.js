@@ -58,9 +58,9 @@ define(function(require) {
             });
 
             if (this.startButtonView.deferredRender) {
-                this.startButtonView.deferredRender.fail(_.bind(function() {
+                this.startButtonView.deferredRender.fail(() => {
                     this.trigger('fail');
-                }, this));
+                });
             }
 
             this.$('.modal-footer').append(this.startButtonView.$el);
