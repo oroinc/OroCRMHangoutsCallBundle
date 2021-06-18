@@ -7,7 +7,7 @@ define(function(require) {
 
     const NotesFieldView = BaseView.extend({
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function NotesFieldView(options) {
             NotesFieldView.__super__.constructor.call(this, options);

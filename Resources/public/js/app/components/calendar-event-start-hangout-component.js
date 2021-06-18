@@ -27,14 +27,14 @@ define(function(require) {
         declinedStatus: null,
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function CalendarEventStartHangoutComponent(options) {
             CalendarEventStartHangoutComponent.__super__.constructor.call(this, options);
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         initialize: function(options) {
             _.extend(

@@ -21,7 +21,7 @@ define(function(require) {
         eventBroker: null,
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function InviteHangoutComponent(options) {
             InviteHangoutComponent.__super__.constructor.call(this, options);

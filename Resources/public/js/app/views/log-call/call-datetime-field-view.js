@@ -7,7 +7,7 @@ define(function(require) {
 
     const CallDatetimeFieldView = BaseView.extend({
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function CallDatetimeFieldView(options) {
             CallDatetimeFieldView.__super__.constructor.call(this, options);

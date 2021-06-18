@@ -12,7 +12,7 @@ define(function(require) {
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function PhoneFieldView(options) {
             PhoneFieldView.__super__.constructor.call(this, options);
