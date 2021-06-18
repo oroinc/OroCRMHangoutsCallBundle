@@ -17,14 +17,14 @@ define(function(require) {
         eventBroker: null,
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function LogCallStartHangoutComponent(options) {
             LogCallStartHangoutComponent.__super__.constructor.call(this, options);
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         initialize: function(options) {
             LogCallStartHangoutComponent.__super__.initialize.call(this, options);
