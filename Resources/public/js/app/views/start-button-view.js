@@ -58,7 +58,7 @@ define(function(require, exports, module) {
          * @inheritdoc
          */
         delegateEvents: function(events) {
-            $(window).on('blur' + this.eventNamespace(), _.bind(this.onWindowBlur, this));
+            $(window).on('blur' + this.eventNamespace(), this.onWindowBlur.bind(this));
             return StartButtonView.__super__.undelegateEvents.call(this, events);
         },
 
@@ -181,11 +181,11 @@ define(function(require, exports, module) {
             $('body').append($container);
 
             gapi.hangout.render($container[0], this.combineHangoutOptions());
-            $container.find('iframe').one('load' + this.eventNamespace(), _.bind(function(e) {
+            $container.find('iframe').one('load' + this.eventNamespace(), e => {
                 this.$el.html(e.target);
                 $container.remove();
                 this._resolveDeferredRender();
-            }, this));
+            });
         },
 
         /**
@@ -199,11 +199,11 @@ define(function(require, exports, module) {
              *  - to give a time to start hangout dialog
              *  - in FF iframe is not activeElement yet at the time of main window get blur
              */
-            _.delay(_.bind(function() {
+            _.delay(() => {
                 if (iframe === window.document.activeElement) {
                     this.trigger('click');
                 }
-            }, this), 500);
+            }, 500);
         }
     });
 
