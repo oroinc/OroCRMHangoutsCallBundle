@@ -1,4 +1,4 @@
-{% extends "OroCallBundle:Call:activityLink.html.twig" %}
+{% extends "@OroCall/Call/activityLink.html.twig" %}
 
 {% block action_controll %}
     {% set cssClass = 'btn icons-holder-text' %}
@@ -41,5 +41,5 @@
         } %}
     {% endif %}
 
-    {% include "OroHangoutsCallBundle::inviteHangoutLink.html.twig" %}
+    {% include "@OroHangoutsCall/inviteHangoutLink.html.twig" %}
 {% endblock %}
