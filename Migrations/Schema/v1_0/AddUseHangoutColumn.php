@@ -19,9 +19,6 @@ class AddUseHangoutColumn implements Migration
         self::useHangoutColumn($schema);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public static function useHangoutColumn(Schema $schema)
     {
         $table = $schema->getTable('oro_calendar_event');
