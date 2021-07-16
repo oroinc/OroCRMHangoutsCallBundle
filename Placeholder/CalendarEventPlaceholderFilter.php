@@ -18,11 +18,6 @@ class CalendarEventPlaceholderFilter
     /** @var TokenAccessorInterface */
     protected $tokenAccessor;
 
-    /**
-     * @param PlaceholderFilter $placeholderFilter
-     * @param DoctrineHelper $doctrineHelper
-     * @param TokenAccessorInterface $tokenAccessor
-     */
     public function __construct(
         PlaceholderFilter $placeholderFilter,
         DoctrineHelper $doctrineHelper,

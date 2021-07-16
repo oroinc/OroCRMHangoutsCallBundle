@@ -11,14 +11,9 @@ class CallPlaceholderFilter
     /** @var PlaceholderFilter */
     protected $placeholderFilter;
 
-
     /** @var DoctrineHelper */
     protected $doctrineHelper;
 
-    /**
-     * @param PlaceholderFilter $placeholderFilter
-     * @param DoctrineHelper $doctrineHelper
-     */
     public function __construct(
         PlaceholderFilter $placeholderFilter,
         DoctrineHelper $doctrineHelper
