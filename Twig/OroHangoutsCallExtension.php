@@ -14,9 +14,6 @@ class OroHangoutsCallExtension extends AbstractExtension
     /** @var array */
     private $initialApps;
 
-    /**
-     * @param array $initialApps
-     */
     public function __construct(array $initialApps)
     {
         $this->initialApps = $initialApps;
