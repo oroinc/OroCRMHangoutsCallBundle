@@ -38,14 +38,4 @@ class OroHangoutsCallExtension extends AbstractExtension
     {
         return $this->initialApps;
     }
-
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'oro_hangoutscall_extension';
-    }
 }

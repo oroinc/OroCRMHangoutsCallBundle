@@ -27,9 +27,4 @@ class OroHangoutsCallExtensionTest extends \PHPUnit\Framework\TestCase
             self::callTwigFunction($this->extension, 'get_hangoutscall_initail_apps', [])
         );
     }
-
-    public function testGetName()
-    {
-        $this->assertEquals('oro_hangoutscall_extension', $this->extension->getName());
-    }
 }
