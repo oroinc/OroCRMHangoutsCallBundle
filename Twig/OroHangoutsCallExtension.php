@@ -11,8 +11,7 @@ use Twig\TwigFunction;
  */
 class OroHangoutsCallExtension extends AbstractExtension
 {
-    /** @var array */
-    private $initialApps;
+    private array $initialApps;
 
     public function __construct(array $initialApps)
     {
@@ -20,9 +19,7 @@ class OroHangoutsCallExtension extends AbstractExtension
     }
 
     /**
-     * Returns a list of functions to add to the existing list.
-     *
-     * @return array An array of functions
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
@@ -31,21 +28,8 @@ class OroHangoutsCallExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function getInitialApps()
+    public function getInitialApps(): array
     {
         return $this->initialApps;
-    }
-
-    /**
-     * Returns the name of the extension.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'oro_hangoutscall_extension';
     }
 }

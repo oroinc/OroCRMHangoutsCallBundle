@@ -9,11 +9,11 @@ class OroHangoutsCallExtensionTest extends \PHPUnit\Framework\TestCase
 {
     use TwigExtensionTestCaseTrait;
 
-    /** @var OroHangoutsCallExtension */
-    protected $extension;
-
     /** @var array */
-    protected $initialAppsParameter = [['app_id' => '100000000001']];
+    private $initialAppsParameter = [['app_id' => '100000000001']];
+
+    /** @var OroHangoutsCallExtension */
+    private $extension;
 
     protected function setUp(): void
     {
@@ -26,10 +26,5 @@ class OroHangoutsCallExtensionTest extends \PHPUnit\Framework\TestCase
             $this->initialAppsParameter,
             self::callTwigFunction($this->extension, 'get_hangoutscall_initail_apps', [])
         );
-    }
-
-    public function testGetName()
-    {
-        $this->assertEquals('oro_hangoutscall_extension', $this->extension->getName());
     }
 }
