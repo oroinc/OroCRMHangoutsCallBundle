@@ -15,14 +15,14 @@ define(function(require) {
         history: null,
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function HangoutsEventBroker(options) {
             HangoutsEventBroker.__super__.constructor.call(this, options);
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          * @param {Object} options
          * @param {string=} options.token a key to distinguish hangout call process
          */
@@ -34,7 +34,7 @@ define(function(require) {
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         dispose: function() {
             if (this.disposed) {

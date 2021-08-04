@@ -18,7 +18,7 @@ define(function(require, exports, module) {
         token: null,
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function StartButtonView(options) {
             StartButtonView.__super__.constructor.call(this, options);
@@ -55,7 +55,7 @@ define(function(require, exports, module) {
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         delegateEvents: function(events) {
             $(window).on('blur' + this.eventNamespace(), this.onWindowBlur.bind(this));
@@ -63,7 +63,7 @@ define(function(require, exports, module) {
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         undelegateEvents: function() {
             $(window).off(this.eventNamespace());
@@ -71,7 +71,7 @@ define(function(require, exports, module) {
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         remove: function() {
             $(window).off(this.eventNamespace());
@@ -84,7 +84,7 @@ define(function(require, exports, module) {
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         _ensureElement: function() {
             StartButtonView.__super__._ensureElement.call(this);
@@ -152,7 +152,7 @@ define(function(require, exports, module) {
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         render: function() {
             this.$el.empty();

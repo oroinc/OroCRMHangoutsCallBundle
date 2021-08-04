@@ -20,14 +20,14 @@ define(function(require) {
         hangoutOptions: null,
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function InviteModalView(options) {
             InviteModalView.__super__.constructor.call(this, options);
         },
 
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         initialize: function(options) {
             _.extend(this, _.defaults(_.pick(options, ['hangoutOptions', 'token']), {

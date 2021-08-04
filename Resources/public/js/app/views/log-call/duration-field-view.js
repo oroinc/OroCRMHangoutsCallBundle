@@ -6,7 +6,7 @@ define(function(require) {
 
     const DurationFieldView = BaseView.extend({
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function DurationFieldView(options) {
             DurationFieldView.__super__.constructor.call(this, options);

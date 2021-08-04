@@ -6,7 +6,7 @@ define(function(require) {
 
     const SubjectFieldView = BaseView.extend({
         /**
-         * @inheritDoc
+         * @inheritdoc
          */
         constructor: function SubjectFieldView(options) {
             SubjectFieldView.__super__.constructor.call(this, options);
