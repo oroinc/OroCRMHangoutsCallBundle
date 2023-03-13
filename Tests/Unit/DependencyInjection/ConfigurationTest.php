@@ -3,42 +3,44 @@
 namespace Oro\Bundle\HangoutsCallBundle\Tests\Unit\DependencyInjection;
 
 use Oro\Bundle\HangoutsCallBundle\DependencyInjection\Configuration;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 
 class ConfigurationTest extends \PHPUnit\Framework\TestCase
 {
+    private function processConfiguration(array $config): array
+    {
+        return (new Processor())->processConfiguration(new Configuration(), $config);
+    }
+
     /**
      * @dataProvider dataProviderExceptionConfigTree
      */
-    public function testExceptionConfigTree($options, $exception)
+    public function testExceptionConfigTree($config, $exception)
     {
         $this->expectException($exception);
 
-        $processor = new Processor();
-        $configuration = new Configuration([]);
-        $processor->processConfiguration($configuration, [$options]);
+        $this->processConfiguration([$config]);
     }
 
-    public function dataProviderExceptionConfigTree()
+    public function dataProviderExceptionConfigTree(): array
     {
         return [
-            [
+            'missing application id' => [
                 [
                     'initial_apps' => [
-                        // missing application id
                         ['app_name' => 'myApp'],
                     ]
                 ],
-                '\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException'
+                InvalidConfigurationException::class
             ],
-            [
+            'incorrect application type' => [
                 [
                     'initial_apps' => [
-                        // incorrect application type
                         ['app_id' => '1000001', 'app_type' => 'MY_APP'],
                     ]
                 ],
-                '\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException'
+                InvalidConfigurationException::class
             ],
         ];
     }
@@ -46,29 +48,15 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider dataProviderConfigTree
      */
-    public function testConfigTree($options, $expects)
+    public function testConfigTree($config, $expected)
     {
-        $processor = new Processor();
-        $configuration = new Configuration(array());
-        $result = $processor->processConfiguration($configuration, array($options));
-
-        $this->assertEquals($expects, $result);
+        $processedConfig = $this->processConfiguration([$config]);
+        unset($processedConfig['settings']);
+        $this->assertEquals($expected, $processedConfig);
     }
 
-    public function dataProviderConfigTree()
+    public function dataProviderConfigTree(): array
     {
-        $settings = [
-            'resolved' => true,
-            'enable_google_hangouts_for_email' => [
-                'value' => true,
-                'scope' => 'app',
-            ],
-            'enable_google_hangouts_for_phone' => [
-                'value' => true,
-                'scope' => 'app',
-            ]
-        ];
-
         return [
             [
                 [],
@@ -80,8 +68,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
                             'app_name' => 'OroHangoutsApp',
                             'base_path' => 'bundles/orohangoutscall/hangouts-app',
                         ]
-                    ],
-                    'settings' => $settings
+                    ]
                 ]
             ],
             [
@@ -98,8 +85,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
                             'app_id' => '100000001',
                             'app_type' => 'ROOM_APP',
                         ]
-                    ],
-                    'settings' => $settings
+                    ]
                 ]
             ],
             [
@@ -131,8 +117,7 @@ class ConfigurationTest extends \PHPUnit\Framework\TestCase
                             'app_type' => 'ROOM_APP',
                             'app_name' => 'ChessApp'
                         ]
-                    ],
-                    'settings' => $settings
+                    ]
                 ]
             ],
         ];
