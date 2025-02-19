@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {"Oro\\Bundle\\HangoutsCallBundle\\": ""},
-        "exclude-from-classmap": ["/Tests/"]
+        "exclude-from-classmap": ["**/Tests/"]
     },
     "require": {
         "oro/platform": "5.0.*",
